@@ -1,0 +1,67 @@
+{% extends "hflanRegistrationBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}tournament.title.page.register.edit{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ app.user.team.name }} <small>{% trans %}tournament.title.page.register.edit{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+{% endblock %}
+
+{% block content %}
+
+<h2>{% trans %}tournament.title.page.register.info{% endtrans %}</h2>
+
+<table class="table">
+    <tr>
+        <th>{% trans %}tournament.field.game{% endtrans %}</th>
+        <th>{% trans %}tournament.field.playersPerTeam{% endtrans %}</th>
+        <th>{% trans %}tournament.field.price{% endtrans %}</th>
+        <th>{% trans %}tournament.field.prize_pool{% endtrans %}</th>
+    </tr>
+    <tr>
+        <td>{{ tournament.game }}</td>
+        <td>{{ tournament.playersPerTeam }}</td>
+        <td>{{ tournament.price }} €</td>
+        <td>{{ tournament.prizePool }} €</td>
+    </tr>
+</table>
+
+<p></p>
+
+<table class="table">
+    <tr>
+        <th>{% trans %}tournament.field.single_entry{% endtrans %}</th>
+        <th>{% trans %}tournament.field.pricePerPlayer{% endtrans %}</th>
+        <th>{% trans %}tournament.field.total_team{% endtrans %}</th>
+    </tr>
+    <tr>
+        <td>{{ tournament.event.price }} €</td>
+        <td><span style="color:#898989">{{ tournament.event.price }} € + {{ tournament.price }} € =</span> {{ tournament.event.price+tournament.price }} €</td>
+        <td>{{ (tournament.event.price+tournament.price)*tournament.playersPerTeam }} €</td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>{% trans %}tournament.title.page.register.edit{% endtrans %}</h2>
+
+<form method="post" class="form form-label-large">
+    <table class="table">
+        <tr>
+            <td>
+                {{ form_widget(teamForm) }}
+            </td>
+        </tr>
+    </table>
+
+    <div class="form-action">
+        <button type="submit" class="btn"><i class="icon-ok icon-white"></i> {% trans %}register.action.save{% endtrans %}</button>
+    </div>
+
+</form>
+
+{% endblock %}

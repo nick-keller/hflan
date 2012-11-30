@@ -1,0 +1,66 @@
+{% extends "hflanBlogBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {{ article.title }}
+{% endblock %}
+
+{% block sectionTitle %}
+        {{ parent() }} <small>{% trans %}blog.title.page.show{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+    {% if is_granted('ROLE_NEWSER') %}
+        <h2>{% trans %}blog.title.aside.admin{% endtrans %}</h2>
+        <a href="{{ path('hflan_blog_new') }}" class="btn"><i class="icon-plus icon-white"></i> {% trans %}blog.action.new{% endtrans %}</a>
+        <a href="{{ path('hflan_blog_admin') }}" class="btn"><i class="icon-th-list icon-white"></i> {% trans %}blog.action.list{% endtrans %}</a>
+        <hr>
+    {% endif %}
+{% endblock %}
+
+{% block blog %}
+
+<div class="date"><span>{{ article.createdAt|date('d') }}</span> {{ article.createdAt|date('M') }}</div>
+
+{% if is_granted('ROLE_NEWSER') %}
+<div class="date settings">
+    <a href="#" rel="dropdown-toogle"><i class="icon-cog icon-white"></i></a>
+    <div class="dropdown">
+        <ul>
+            <li><a href="{{ path('hflan_blog_edit', {slug: article.slug}) }}">
+                <i class="icon-pencil"></i>{% trans %}blog.action.edit{% endtrans %}
+            </a></li>
+            {% if article.published %}
+            <li><a href="{{ path('hflan_blog_toggle', {slug: article.slug}) }}">
+                <i class="icon-eye-close"></i>{% trans %}blog.action.hide{% endtrans %}
+            </a></li>
+            {% else %}
+            <li><a href="{{ path('hflan_blog_toggle', {slug: article.slug}) }}">
+                <i class="icon-eye-open"></i>{% trans %}blog.action.publish{% endtrans %}
+            </a></li>
+            {% endif %}
+            <li class="separator"></li>
+            <li><a href="{{ path('hflan_blog_delete', {slug: article.slug}) }}">
+                <i class="icon-remove-sign"></i>{% trans %}blog.action.delete{% endtrans %}
+            </a></li>
+        </ul>
+    </div>
+</div>
+{% endif %}
+
+{% if not article.published %}
+<div class="alert">
+    {% trans %}blog.message.alert.hidden{% endtrans %}
+</div>
+{% endif %}
+
+<h2>{{ article.title }}</h2>
+{% if article.path is not empty %}
+<div class="article-image">
+    <img src="{{ asset(article.webPath) }}" alt="Image de présentation">
+</div>
+{% endif %}
+{{ article.content|toHTML|raw }}
+<hr>
+<a class="btn-mini" href="{{ path('hflan_blog_list') }}">{% trans %}blog.action.back_to_list{% endtrans %}</a>
+
+{% endblock %}

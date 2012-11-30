@@ -1,0 +1,25 @@
+guestbook:
+    title:
+        bundle: Guestbook
+        new_message: Give us feedback
+        page:
+            admin: Admin
+            index: Your comments
+        aside:
+            admin: Admin actions
+    message:
+        success:
+            new: Your message has been posted!
+            delete: Messages have been successfully deleted!
+        error:
+    field:
+        author: Nickname
+        email: E-mail
+        rating: Rating
+        message: Message
+        date: Date
+    action:
+        list: List of messages
+        delete: Delete
+        selection: Selection
+        post: Post!

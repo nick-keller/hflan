@@ -1,0 +1,15 @@
+hflan_partners_index:
+    pattern:  /
+    defaults: { _controller: hflanPartnersBundle:Partners:index }
+
+hflan_partners_new:
+    pattern:  /new
+    defaults: { _controller: hflanPartnersBundle:Partners:new }
+
+hflan_partners_admin:
+    pattern:  /admin
+    defaults: { _controller: hflanPartnersBundle:Partners:admin }
+
+hflan_partners_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: hflanPartnersBundle:Partners:edit }

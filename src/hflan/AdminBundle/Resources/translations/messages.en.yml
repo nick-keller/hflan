@@ -1,0 +1,13 @@
+admin:
+    title:
+        bundle: Admin
+        page:
+            dashboard: Dashboard
+        aside:
+    message:
+        success:
+        error:
+        alert:
+    field:
+    action:
+        new: New

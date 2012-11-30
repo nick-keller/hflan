@@ -1,0 +1,47 @@
+hflan_tournament_index:
+    pattern:  /
+    defaults: { _controller: hflanTournamentBundle:Event:index }
+
+hflan_tournament_new_event:
+    pattern:  /new/event
+    defaults: { _controller: hflanTournamentBundle:Event:new }
+
+hflan_tournament_new_tournament:
+    pattern:  /{slug}/new/tournament
+    defaults: { _controller: hflanTournamentBundle:Tournament:new, type: 'default' }
+
+hflan_tournament_new_casu:
+    pattern:  /{slug}/new/casu
+    defaults: { _controller: hflanTournamentBundle:Tournament:new, type: 'casu' }
+
+hflan_tournament_show_tournament:
+    pattern:  /{slug}/{id}
+    defaults: { _controller: hflanTournamentBundle:Tournament:show }
+    requirements:
+        slug: .+
+        id: \d+
+
+hflan_tournament_edit_tournament:
+    pattern:  /{slug}/{id}/edit
+    defaults: { _controller: hflanTournamentBundle:Tournament:edit }
+    requirements:
+        slug: .+
+        id: \d+
+        slug: .+
+
+hflan_tournament_edit_event:
+    pattern:  /{slug}/edit
+    defaults: { _controller: hflanTournamentBundle:Event:edit }
+    requirements:
+        slug: .+
+
+hflan_tournament_delete_event:
+    pattern:  /{slug}/delete
+    defaults: { _controller: hflanTournamentBundle:Event:delete }
+    requirements:
+        slug: .+
+
+hflan_tournament_show_event:
+    pattern: /{slug}
+    defaults: { _controller: hflanTournamentBundle:Event:show }
+    requirements:

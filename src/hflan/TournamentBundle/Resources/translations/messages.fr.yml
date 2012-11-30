@@ -1,0 +1,74 @@
+tournament:
+    title:
+        bundle: Tournois
+        info: Informations
+        page:
+            event:
+                index: Liste des LAN
+                new: Nouvelle LAN
+                show: Liste des tournois
+                edit: Edition de la LAN
+            tournament:
+                new: Nouveau tournois
+                show: Détails
+                edit: Edition
+            register:
+                info: Informations sur votre tournoi
+                edit: Editer vos informations
+        aside:
+            admin: Administration
+            next_lan: Prochaine LAN
+        form:
+            global: Général
+            date: Dates
+            register: Inscriptions
+        team:
+            confirmed: Equipes validées
+            pending: En attente
+    message:
+        success:
+        error:
+        register:
+            unknown: La date des inscriptions n'est pas encore fixé. Les inscriptions débutent généralement un mois avant le début d'une lan.
+            soon: Les inscriptions ouvrrirons %date%.
+            open: Dépéchez vous les inscriptions ferment %date% !
+            close: Les inscriptions sont fermés.
+        no_tournament: Il n'y a pas encore de tournoi. Cliquez sur <b>Ajouter un tournoi</b>.
+        no_confirmed_team: Aucune équipe n'a validé son inscription.
+        no_pending_team: Aucne équipe dans la liste d'attente.
+    field:
+        name: Nom
+        start_at: Début
+        end_at: Fin
+        price: Prix
+        pricePerPlayer: Prix par joueur
+        single_entry: Entrée simple
+        total_team: Total team
+        prize_pool: Prize pool
+        open_at: Ouverture
+        close_at: Fermeture
+        open: Visible
+        public: Visible
+        game: Jeu
+        nbrTeams: Nombre de teams
+        playersPerTeam: Joueurs par team
+        teams: Equipes
+        pending: En attente
+        tournament: Tournoi
+        team_name: Nom d'équipe
+        created_at: Date de création
+        bnet: Utilise Bnet
+        casu: Visiteurs
+        nbrVisitor: Nombre de visiteurs
+        message:
+            team_name: Pour les tournois individuels indiquez ici votre pseudo.
+    action:
+        new: Nouveau
+        edit: Editer
+        save: Enregistrer
+        back: Retour
+        action: Action
+        cancel: Annuler
+        delete: Supprimer
+        add_tournament: Ajouter un tournoi
+        add_casu: Freeplay

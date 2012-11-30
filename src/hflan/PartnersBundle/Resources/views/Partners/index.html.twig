@@ -1,0 +1,26 @@
+{% extends "hflanPartnersBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}partners.title.page.index{% endtrans %}
+{% endblock %}
+
+{% block administration %}
+    {% if is_granted('ROLE_COM') %}
+        <h2>{% trans %}partners.title.aside.admin{% endtrans %}</h2>
+        <a href="{{ path('hflan_partners_new') }}" class="btn"><i class="icon-plus icon-white"></i> {% trans %}partners.action.new{% endtrans %}</a>
+        <a href="{{ path('hflan_partners_admin') }}" class="btn"><i class="icon-th-list icon-white"></i> {% trans %}partners.action.list{% endtrans %}</a>
+        <hr>
+    {% endif %}
+{% endblock %}
+
+{% block partners %}
+
+<div class="partners-list">
+{% for partner in partners %}
+    <a href="{{ partner.url }}">
+       <img src="{{ asset(partner.webPath) }}" alt="{{ partner.name }}" title="{{ partner.description }}">
+    </a>
+{% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "hflanPartnersBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}partners.title.page.admin{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}partners.title.page.admin{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+<h2>{% trans %}partners.title.aside.admin{% endtrans %}</h2>
+<a href="{{ path('hflan_partners_new') }}" class="btn"><i class="icon-plus icon-white"></i> {% trans %}partners.action.new{% endtrans %}</a>
+<hr>
+{% endblock %}
+
+{% block partners %}
+
+{% if partners is empty %}
+<p>{% trans %}partners.message.create_new{% endtrans %}</p>
+{% else %}
+
+<form method="post" {{ form_enctype(form) }}>
+    <table class="table">
+        <tr>
+            <th>{% trans %}partners.field.name{% endtrans %}</th>
+            <th>{% trans %}partners.field.url{% endtrans %}</th>
+        </tr>
+        {% for partner in partners %}
+        <tr href="{{ path('hflan_partners_edit', {id: partner.id}) }}" class="selectable">
+            <td>{{ form_widget(form[partner.id]) }} {{ partner.name }}</td>
+            <td>{{ partner.url }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="form-action" style="margin-top: 5px;">
+        {{ form_label(form.batch_action) }}
+        {{ form_widget(form.batch_action) }}
+        {{ form_rest(form) }}
+        <button type="submit" class="btn">Go</button>
+    </div>
+</form>
+
+{% endif %}
+
+{% endblock %}

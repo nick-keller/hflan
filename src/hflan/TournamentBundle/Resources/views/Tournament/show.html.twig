@@ -1,0 +1,91 @@
+{% extends "hflanTournamentBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}tournament.title.page.tournament.show{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ tournament.name }} <small>{% trans %}tournament.title.page.tournament.show{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+    <h2>{% trans %}tournament.title.aside.admin{% endtrans %}</h2>
+        <p>
+            <a href="{{ path('hflan_tournament_show_event', {slug: tournament.event.slug}) }}" class="btn">
+                <i class="icon-backward icon-white"></i> {% trans %}tournament.action.back{% endtrans %}
+            </a>
+        </p>
+        <p>
+            <a href="{{ path('hflan_tournament_edit_tournament', {slug: tournament.event.slug, id: tournament.id}) }}" class="btn">
+                <i class="icon-pencil icon-white"></i> {% trans %}tournament.action.edit{% endtrans %}
+            </a>
+        </p>
+    <hr>
+{% endblock %}
+
+{% block content %}
+
+<h2>{% trans %}tournament.title.info{% endtrans %}</h2>
+
+<table class="table">
+    <tr>
+        <th>{% trans %}tournament.field.price{% endtrans %}</th>
+        <th>{% trans %}tournament.field.prize_pool{% endtrans %}</th>
+        <th>{% trans %}tournament.field.nbrTeams{% endtrans %}</th>
+        <th>{% trans %}tournament.field.playersPerTeam{% endtrans %}</th>
+    </tr>
+    <tr>
+        <td>{{ tournament.price }} €</td>
+        <td>{{ tournament.prizePool }} €</td>
+        <td>{{ tournament.nbrTeams }}</td>
+        <td>{{ tournament.playersPerTeam }}</td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>{% trans %}tournament.title.team.confirmed{% endtrans %}</h2>
+
+{% if confirmedTeams is not empty%}
+
+<table class="table">
+    <tr>
+        <th>{% trans %}tournament.field.teams{% endtrans %}</th>
+        <th>{% trans %}tournament.field.created_at{% endtrans %}</th>
+    </tr>
+    {% for team in confirmedTeams %}
+    <tr>
+        <td>{{ team.name }}</td>
+        <td>{{ team.createdAt|toHuman|ucFirst }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<p>{% trans %}tournament.message.no_confirmed_team{% endtrans %}</p>
+{% endif %}
+
+<hr>
+
+<h2>{% trans %}tournament.title.team.pending{% endtrans %}</h2>
+
+{% if pendingTeams is not empty%}
+
+<table class="table">
+    <tr>
+        <th>{% trans %}tournament.field.teams{% endtrans %}</th>
+        <th>{% trans %}tournament.field.created_at{% endtrans %}</th>
+    </tr>
+    {% for team in pendingTeams %}
+    <tr>
+        <td>{{ team.name }}</td>
+        <td>{{ team.createdAt|toHuman|ucFirst }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<p>{% trans %}tournament.message.no_pending_team{% endtrans %}</p>
+{% endif %}
+
+{% endblock %}

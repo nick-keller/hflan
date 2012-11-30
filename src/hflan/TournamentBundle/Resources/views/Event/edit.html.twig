@@ -1,0 +1,38 @@
+{% extends "hflanTournamentBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}tournament.title.page.event.edit{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}tournament.title.page.event.edit{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+<h2>{% trans %}tournament.title.aside.admin{% endtrans %}</h2>
+<a href="{{ path('hflan_tournament_show_event', {slug: event.slug}) }}" class="btn"><i class="icon-remove icon-white"></i> {% trans %}tournament.action.cancel{% endtrans %}</a>
+<hr>
+{% endblock %}
+
+{% block content %}
+
+<form method="post" {{ form_enctype(form) }} class="form">
+    {{ form_errors(form) }}
+    <h3>{% trans %}tournament.title.form.global{% endtrans %}</h3>
+    {{ form_row(form.name) }}
+    {{ form_row(form.price) }}
+    <h3>{% trans %}tournament.title.form.date{% endtrans %}</h3>
+    {{ form_row(form.start_at) }}
+    {{ form_row(form.end_at) }}
+    {{ form_row(form.public) }}
+    <h3>{% trans %}tournament.title.form.register{% endtrans %}</h3>
+    {{ form_row(form.open_at) }}
+    {{ form_row(form.close_at) }}
+    {{ form_row(form.open) }}
+    {{ form_rest(form) }}
+    <div class="form-action">
+        <button type="submit" class="btn"><i class="icon-ok icon-white"></i> {% trans %}tournament.action.save{% endtrans %}</button>
+    </div>
+</form>
+
+{% endblock %}

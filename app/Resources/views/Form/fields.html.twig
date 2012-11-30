@@ -1,0 +1,22 @@
+{% block form_row %}
+{% spaceless %}
+<div style="clear:both;"></div>
+    {{ form_label(form) }}
+<div class="form-widget">
+    {{ form_widget(form) }}
+    {{ form_errors(form) }}
+</div>
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block field_errors %}
+{% spaceless %}
+{% if errors|length > 0 %}
+<div class="alert alert-error">
+    {% for error in errors %}
+    {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+    {% endfor %}
+</div>
+{% endif %}
+{% endspaceless %}
+{% endblock field_errors %}

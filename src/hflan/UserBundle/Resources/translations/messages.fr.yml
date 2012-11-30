@@ -1,0 +1,10 @@
+user:
+    message:
+      form:
+        invalid_repeat: Les deux champs doivent correspondre.
+    field:
+        email: E-mail
+        password: Mot de passe
+        message:
+            email: Votre email vous servira de login pour vous connecter à votre compte. Vous recevrez votre validation d'inscription à cette adresse.
+            password: Votre mot de passe pour vous connecter à votre compte.

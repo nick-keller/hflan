@@ -1,0 +1,42 @@
+{% extends "hflanGuestbookBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}guestbook.title.page.admin{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}guestbook.title.page.admin{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}{% endblock %}
+
+{% block guestbook %}
+
+<form method="post" {{ form_enctype(form) }}>
+    <table class="table">
+        <tr>
+            <th>{% trans %}guestbook.field.author{% endtrans %}</th>
+            <th>{% trans %}guestbook.field.message{% endtrans %}</th>
+            <th>{% trans %}guestbook.field.date{% endtrans %}</th>
+        </tr>
+        {% for message in messages %}
+        <tr href="#" class="selectable">
+            <td>{{ form_widget(form[message.id]) }} {{ message.author }}</td>
+            <td>{{ message.message|toPlainText(40)|raw }}</td>
+            <td>{{ message.createdAt|date('d/m/Y')}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="form-action" style="margin-top: 5px;">
+        {{ form_label(form.batch_action) }}
+        {{ form_widget(form.batch_action) }}
+        {{ form_rest(form) }}
+        <button type="submit" class="btn">Go</button>
+    </div>
+</form>
+
+<hr>
+
+{{ pagination(page, nb_pages, 'hflan_guestbook_admin') }}
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "hflanPartnersBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}partners.title.page.edit{% endtrans %}
+{% endblock %}
+
+{% block administration %}
+<h2>{% trans %}partners.title.aside.admin{% endtrans %}</h2>
+<a href="{{ path('hflan_partners_admin') }}" class="btn"><i class="icon-th-list icon-white"></i> {% trans %}partners.action.list{% endtrans %}</a>
+<hr>
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}partners.title.page.edit{% endtrans %}</small>
+{% endblock %}
+
+{% block partners %}
+
+<form method="post" {{ form_enctype(form) }} class="form">
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.url) }}
+    {{ form_row(form.sort_index) }}
+    {{ form_row(form.file) }}
+    {% if partner.path is not empty %}
+    <div class="form-widget">
+        <img src="{{ asset(partner.webPath)}}" alt="preview" class="preview-img">
+    </div>
+    {% endif %}
+    {{ form_rest(form) }}
+    <div class="form-action">
+        <input type="submit" class="btn" value="{% trans %}partners.action.save{% endtrans %}" />
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+register:
+    title:
+        bundle: Inscriptions
+        page:
+            index: S'inscrire à un tournois
+        aside:
+            admin: Administration
+    message:
+        success:
+        error:
+    field:
+        playerX: Joueur %player%
+    action:
+        register: S'inscrire !
+        save: Modifier

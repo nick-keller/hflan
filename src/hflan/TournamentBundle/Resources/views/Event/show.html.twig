@@ -1,0 +1,62 @@
+{% extends "hflanTournamentBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}tournament.title.page.event.show{% endtrans %}
+{% endblock %}
+
+{% block administration %}
+    {% if is_granted('ROLE_RESPO') %}
+        <h2>{% trans %}tournament.title.aside.admin{% endtrans %}</h2>
+        <p>
+            <a href="{{ path('hflan_tournament_index') }}" class="btn">
+                <i class="icon-backward icon-white"></i> {% trans %}tournament.action.back{% endtrans %}
+            </a>
+        </p>
+        <p style="line-height: 30px;">
+            <a href="{{ path('hflan_tournament_new_tournament', {slug: event.slug}) }}" class="btn">
+                <i class="icon-plus icon-white"></i> {% trans %}tournament.action.add_tournament{% endtrans %}
+            </a>
+            <a href="{{ path('hflan_tournament_new_casu', {slug: event.slug}) }}" class="btn">
+                <i class="icon-plus icon-white"></i> {% trans %}tournament.action.add_casu{% endtrans %}
+            </a>
+            <a href="{{ path('hflan_tournament_edit_event', {slug: event.slug})}}"  class="btn">
+                <i class="icon-pencil icon-white"></i> {% trans %}tournament.action.edit{% endtrans %}
+            </a>
+            <a href="{{ path('hflan_tournament_delete_event', {slug: event.slug})}}"  class="btn">
+                <i class="icon-remove icon-white"></i> {% trans %}tournament.action.delete{% endtrans %}
+            </a>
+        </p>
+        <hr>
+    {% endif %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ event.name }} <small>{% trans %}tournament.title.page.event.show{% endtrans %}</small>
+{% endblock%}
+
+{% block content %}
+
+{% if tournaments is empty %}
+{% trans %}tournament.message.no_tournament{% endtrans %}
+{% else %}
+<table class="table">
+    <tr>
+        <th>{% trans %}tournament.field.name{% endtrans %}</th>
+        <th>{% trans %}tournament.field.price{% endtrans %}</th>
+        <th>{% trans %}tournament.field.prize_pool{% endtrans %}</th>
+        <th>{% trans %}tournament.field.teams{% endtrans %}</th>
+        <th>{% trans %}tournament.field.pending{% endtrans %}</th>
+    </tr>
+    {% for tournament in tournaments %}
+        <tr href="{{ path('hflan_tournament_show_tournament', {slug: event.slug, id: tournament.id}) }}">
+            <td>{{tournament.name}}</td>
+            <td>{{tournament.price}} €</td>
+            <td>{{tournament.prizePool}} €</td>
+            <td>{{tournament.confirmedTeams}} / {{tournament.nbrTeams}}</td>
+            <td>{{tournament.pendingTeams}}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+{% endblock %}

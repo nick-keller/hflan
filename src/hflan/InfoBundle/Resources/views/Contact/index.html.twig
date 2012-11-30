@@ -1,0 +1,34 @@
+{% extends "::layout.html.twig" %}
+
+{% set currentPage = 'contact' %}
+
+{% block title %}
+{{ parent() }} - Contact
+{% endblock %}
+
+{% block body %}
+<section>
+    {% for key, flash in app.session.flashes %}
+    <div class="alert alert-{{ key }}">
+        {{ flash }}
+    </div>
+    {% endfor %}
+
+    <header>
+        <h1>Nous contacter</h1>
+    </header>
+
+    <h2><i class="icon-envelope"></i> Par mail</h2>
+    <p>Vos pouvez nous contacter à cette adresse <a href="mailto:contact@hf-lan.fr" class="btn-mini">contact@hf-lan.fr</a></p>
+
+    <h2><i class="icon-home"></i> A l'adresse</h2>
+    <p>
+        Club PC - ESIEE Paris<br>
+        2, boulevard Blaise Pascal<br>
+        Cité DESCARTES<br>
+        BP 99<br>
+        93162 Noisy le Grand CEDEX
+    </p>
+
+</section>
+{% endblock %}

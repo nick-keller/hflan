@@ -1,0 +1,18 @@
+{% extends "hflanAdminBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}admin.title.page.dashboard{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}admin.title.page.dashboard{% endtrans %}</small>
+{% endblock%}
+
+{% block admin %}
+
+<a href="{{ path('hflan_blog_admin') }}">Articles</a> |
+<a href="{{ path('hflan_partners_admin') }}">Partenaires</a> |
+<a href="{{ path('hflan_guestbook_admin') }}">Guestbook</a> |
+<a href="{{ path('hflan_tournament_index') }}">Tournois</a>
+
+{% endblock %}

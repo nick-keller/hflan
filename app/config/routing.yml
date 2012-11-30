@@ -1,0 +1,74 @@
+hflan_registration:
+    resource: "@hflanRegistrationBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/registration
+    requirements:
+        _locale: en|fr
+
+hflan_tournament:
+    resource: "@hflanTournamentBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/tournaments
+    requirements:
+       _locale: en|fr
+
+hflan_admin:
+    resource: "@hflanAdminBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/admin
+    requirements:
+        _locale: en|fr
+
+hflan_info:
+    resource: "@hflanInfoBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/info
+    requirements:
+        _locale: en|fr
+
+hflan_guestbook:
+    resource: "@hflanGuestbookBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/guestbook
+    requirements:
+        _locale: en|fr
+
+hflan_blog:
+    resource: "@hflanBlogBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/blog
+    requirements:
+        _locale: en|fr
+
+hflan_partners:
+    resource: "@hflanPartnersBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/partners
+    requirements:
+        _locale: en|fr
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /{_locale}/profile
+    requirements:
+        _locale: en|fr
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /{_locale}/register
+    requirements:
+        _locale: en|fr
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /{_locale}/resetting
+    requirements:
+        _locale: en|fr
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /{_locale}/change-password
+    requirements:
+        _locale: en|fr
+
+hflan_home:
+    pattern:  /{_locale}/
+    defaults: { _controller: hflanBlogBundle:Blog:home, _locale: en }
+    requirements:
+        _locale: (en|fr)?

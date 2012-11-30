@@ -1,0 +1,15 @@
+hflan\UserBundle\Entity\User:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToOne:
+        team:
+            targetEntity: hflan\TournamentBundle\Entity\Team
+            mappedBy: user
+
+    lifecycleCallbacks: {  }

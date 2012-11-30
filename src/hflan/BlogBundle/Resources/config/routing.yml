@@ -1,0 +1,45 @@
+hflan_blog_list:
+    pattern:  /{page}
+    defaults: { _controller: hflanBlogBundle:Blog:index, page: 1 }
+    requirements:
+        page:  \d*
+
+hflan_blog_edit:
+    pattern:   /article/{slug}/edit
+    defaults:  { _controller: hflanBlogBundle:Blog:edit }
+    requirements:
+        slug: .+
+
+hflan_blog_delete:
+    pattern:   /article/{slug}/delete
+    defaults:  { _controller: hflanBlogBundle:Blog:delete }
+    requirements:
+        slug: .+
+
+hflan_blog_toggle:
+    pattern:   /article/{slug}/toggle
+    defaults:  { _controller: hflanBlogBundle:Blog:toggle }
+    requirements:
+        slug: .+
+
+hflan_blog_removeImage:
+    pattern:   /article/{slug}/remove-image
+    defaults:  { _controller: hflanBlogBundle:Blog:removeImage }
+    requirements:
+        slug: .+
+
+hflan_blog_show:
+    pattern:   /article/{slug}
+    defaults:  { _controller: hflanBlogBundle:Blog:show }
+    requirements:
+        slug: .+
+
+hflan_blog_new:
+    pattern:  /new
+    defaults: { _controller: hflanBlogBundle:Blog:new }
+
+hflan_blog_admin:
+    pattern:   /admin/{page}
+    defaults:  { _controller: hflanBlogBundle:Blog:admin, page: 1 }
+    requirements:
+        page:  \d*

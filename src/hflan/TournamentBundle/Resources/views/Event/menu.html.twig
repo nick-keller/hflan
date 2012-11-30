@@ -1,0 +1,32 @@
+{% if nextEvent is not empty %}
+<h2>{% trans %}tournament.title.aside.next_lan{% endtrans %}</h2>
+<div id="defaultCountdown"></div>
+{% if nextEvent.open %}
+    {% if nextEvent.openAt > date('now', "Europe/Paris") %}
+        <p>
+            {% trans with {'%date%': nextEvent.openAt|toHuman} %}tournament.message.register.soon{% endtrans %}
+        </p>
+    {% else %}
+        {% if nextEvent.closeAt > date('now', "Europe/Paris") %}
+            <p>
+                {% trans with {'%date%': nextEvent.closeAt|toHuman} %}tournament.message.register.open{% endtrans %}
+            </p>
+        {% else %}
+            <p>
+                {% trans %}tournament.message.register.close{% endtrans %}
+            </p>
+        {% endif %}
+    {% endif %}
+{% else %}
+    <p>
+    {% trans %}tournament.message.register.unknown{% endtrans %}
+    </p>
+{% endif %}
+
+<hr>
+
+<script type="text/javascript">
+    var target = new Date({{ nextEvent.startAt|date('Y,m-1,j,G,i,s,u') }});
+    $('#defaultCountdown').countdown({until: target});
+</script>
+{% endif %}

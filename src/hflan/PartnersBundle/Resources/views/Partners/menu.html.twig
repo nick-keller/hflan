@@ -1,0 +1,11 @@
+<h2>{% trans %}partners.title.aside.show{% endtrans %}</h2>
+<p>{% trans %}partners.message.invite{% endtrans %}</p>
+<div class="partner-menu">
+    {% for partner in partners %}
+    <a href="{{ partner.url }}">
+        <img src="{{ asset(partner.webPath) }}" alt="{{ partner.name}}" title="{{ partner.description}}">
+    </a>
+    {% endfor %}
+</div>
+<div style="clear: both"></div>
+<hr>

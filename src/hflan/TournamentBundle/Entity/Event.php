@@ -1,0 +1,332 @@
+<?php
+
+namespace hflan\TournamentBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Event
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="hflan\TournamentBundle\Entity\EventRepository")
+ */
+class Event
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", unique=true, length=127)
+     * @Assert\NotBlank()
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", unique=true, length=127)
+     * @Assert\NotBlank()
+     */
+    private $slug;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="start_at", type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
+     */
+    private $start_at;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end_at", type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
+     */
+    private $end_at;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="price", type="integer")
+     * @Assert\NotBlank()
+     */
+    private $price;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="open_at", type="datetime")
+     * @Assert\DateTime()
+     */
+    private $open_at;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="close_at", type="datetime")
+     * @Assert\DateTime()
+     */
+    private $close_at;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="open", type="boolean")
+     */
+    private $open;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="public", type="boolean")
+     */
+    private $public;
+
+    public function __construct()
+    {
+        $this->start_at = new \Datetime();
+        $this->start_at->setTime(10, 0);
+        $this->end_at = new \Datetime();
+        $this->end_at->setTime(17, 0);
+        $this->open_at = new \Datetime();
+        $this->open_at->setTime(10, 0);
+        $this->close_at = new \Datetime();
+        $this->close_at->setTime(23, 59);
+        $this->name = "hf.lan";
+        $this->slug = " ";
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Event
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Event
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set start_at
+     *
+     * @param \DateTime $startAt
+     * @return Event
+     */
+    public function setStartAt($startAt)
+    {
+        $this->start_at = $startAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get start_at
+     *
+     * @return \DateTime 
+     */
+    public function getStartAt()
+    {
+        return $this->start_at;
+    }
+
+    /**
+     * Set end_at
+     *
+     * @param \DateTime $endAt
+     * @return Event
+     */
+    public function setEndAt($endAt)
+    {
+        $this->end_at = $endAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get end_at
+     *
+     * @return \DateTime 
+     */
+    public function getEndAt()
+    {
+        return $this->end_at;
+    }
+
+    /**
+     * Set price
+     *
+     * @param integer $price
+     * @return Event
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return integer 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set open_at
+     *
+     * @param \DateTime $openAt
+     * @return Event
+     */
+    public function setOpenAt($openAt)
+    {
+        $this->open_at = $openAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get open_at
+     *
+     * @return \DateTime 
+     */
+    public function getOpenAt()
+    {
+        return $this->open_at;
+    }
+
+    /**
+     * Set public
+     *
+     * @param boolean $public
+     * @return Event
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+    
+        return $this;
+    }
+
+    /**
+     * Get public
+     *
+     * @return boolean 
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * Set open
+     *
+     * @param boolean $open
+     * @return Event
+     */
+    public function setOpen($open)
+    {
+        $this->open = $open;
+    
+        return $this;
+    }
+
+    /**
+     * Get open
+     *
+     * @return boolean 
+     */
+    public function getOpen()
+    {
+        return $this->open;
+    }
+
+    /**
+     * Set close_at
+     *
+     * @param \DateTime $closeAt
+     * @return Event
+     */
+    public function setCloseAt($closeAt)
+    {
+        $this->close_at = $closeAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get close_at
+     *
+     * @return \DateTime 
+     */
+    public function getCloseAt()
+    {
+        return $this->close_at;
+    }
+}

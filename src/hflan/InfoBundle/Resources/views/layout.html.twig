@@ -1,0 +1,28 @@
+{% extends "::layout.html.twig" %}
+
+{% set currentPage = 'info' %}
+
+{% block body %}
+<div class="tabs">
+    <ul>
+        <li><a class="active ">Tournois</a></li>
+        <li><a class="">Extras</a></li>
+        <li><a class="">Tarifs</a></li>
+        <li><a class="">Règlements</a></li>
+        <li><a class="">Accès</a></li>
+    </ul>
+</div>
+<section>
+    {% for key, flash in app.session.flashes %}
+    <div class="alert alert-{{ key }}">
+        {{ flash }}
+    </div>
+    {% endfor %}
+
+    <header>
+        <h1>{% block sectionTitle %}Informations{% endblock %}</h1>
+    </header>
+    {% block content %}
+    {% endblock %}
+</section>
+{% endblock %}

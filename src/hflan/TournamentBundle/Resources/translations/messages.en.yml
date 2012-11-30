@@ -1,0 +1,11 @@
+tournament:
+    title:
+        bundle: Tounaments
+        page:
+        aside:
+            admin: Admin actions
+    message:
+        success:
+        error:
+    field:
+    action:

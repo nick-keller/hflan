@@ -1,0 +1,31 @@
+partners:
+    title:
+        bundle: Partenaires
+        page:
+            admin: Administration
+            index: Nos partenaires
+            new: Nouveau partenaire
+            edit: Editer le partenaire
+        aside:
+            show: Nos partenaires
+            admin: Gérer les partenaires
+    message:
+        invite: Envie de devenir partenaire officiel de la hf.lan ? <a href="">Contactez-nous</a> !
+        create_new: Pour créer un nouveau partenaire cliquez sur <b>Nouveau</b> à droite.
+        success:
+            new: Le partenaire à bien été ajouté !
+            delete: Les partenaires ont bien été supprimés !
+            update: Modifications bien enregistrées !
+        error:
+    field:
+        name: Nom
+        url: Url
+        description: Description
+        priority: Priorité
+        logo: Logo
+    action:
+        new: Nouveau
+        list: Tout les partenaires
+        delete: Supprimer
+        selection: Sélection
+        save: Enregistrer

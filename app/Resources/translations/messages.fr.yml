@@ -1,0 +1,51 @@
+join_us: Rejoignez nous !
+page:
+    connexion: Connexion
+message:
+    error:
+        form: Il y a une ou plusieurs erreures dans le formulaire.
+dialog:
+    confirm_delete:
+        title: Êtes vous sure ?
+        message: Vous êtes sur le point de supprimer déffinitivement un ou plusieurs objets, il ne serra pas possible de les récupérer.
+date:
+    day:
+        1: lundi
+        2: mardi
+        3: mercredi
+        4: jeudi
+        5: vendredi
+        6: samedi
+        7: dimanche
+    future:
+        Xmonth: dans %x% mois
+        Xweek: dans %x% semaines
+        Xday: dans %x% jours
+        dayAt: %day% à %at%
+        tomorrow: demain à %at%
+        Xhour: dans %x% heures
+        Xmin: dans %x% minutes
+        Xsec: dans %x% secondes
+        lessThan:
+            Xweek: dans moins de %x% semaines
+            Xmonth: dans moins de %x% mois
+            Xhour: dans moins de %x% heures
+        moreThan:
+            Xmonth: dans un peut plus de %x% mois
+            Xhour: dans un peut plus de %x% heures
+    past:
+        Xmonth: il y a %x% mois
+        Xweek: il y a %x% semaines
+        Xday: il y a %x% jours
+        dayAt: %day% à %at%
+        tomorrow: hière à %at%
+        Xhour: il y a %x% heures
+        Xmin: il y a %x% minutes
+        Xsec: il y a %x% secondes
+        lessThan:
+            Xweek: il y a moins de %x% semaines
+            Xmonth: il y a moins de %x% mois
+            Xhour: il y a moins de %x% heures
+        moreThan:
+            Xmonth: il y a un peut plus de %x% mois
+            Xhour: il y a un peut plus de %x% heures

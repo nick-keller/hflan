@@ -1,0 +1,7 @@
+hflan_info_contact:
+    pattern:  /contact
+    defaults: { _controller: hflanInfoBundle:Contact:index }
+
+hflan_info_index:
+    pattern:  /
+    defaults: { _controller: hflanInfoBundle:Info:index }

@@ -1,0 +1,64 @@
+{% extends "hflanBlogBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}blog.title.page.admin{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}blog.title.page.admin{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+<h2>{% trans %}blog.title.aside.admin{% endtrans %}</h2>
+<a href="{{ path('hflan_blog_new') }}" class="btn"><i class="icon-plus icon-white"></i> {% trans %}blog.action.new{% endtrans %}</a>
+<hr>
+{% endblock %}
+
+{% block blog %}
+
+{% if articles is empty %}
+<p>Pour créer un nouvel article cliquez sur <b>Nouveau</b> à droite.</p>
+{% else %}
+
+<form method="post" {{ form_enctype(form) }}>
+    <table class="table">
+        <tr>
+            <th>{% trans %}blog.field.title{% endtrans %}</th>
+            <th>{% trans %}blog.field.date{% endtrans %}</th>
+            <th>{% trans %}blog.field.author{% endtrans %}</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for article in articles %}
+        <tr href="{{ path('hflan_blog_edit', {'slug': article.slug}) }}" class="selectable">
+            <td>{{ form_widget(form[article.id]) }} {{ article.title }}</td>
+            <td>{{ article.createdAt|date('d/m/Y')}}</td>
+            <td>{{ article.author.username }}</td>
+            <td>
+                {% if article.lang == "fr" %}
+                <i class="flag-france"></i>
+                {% else %}
+                <i class="flag-usa"></i>
+                {% endif %}
+            </td>
+            <td>
+                {% if not article.published %}<i class="icon-eye-close"></i>{% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="form-action" style="margin-top: 5px;">
+        {{ form_label(form.batch_action) }}
+        {{ form_widget(form.batch_action) }}
+        {{ form_rest(form) }}
+        <button type="submit" class="btn">Go</button>
+    </div>
+</form>
+
+<hr>
+
+{{ pagination(page, nb_pages, 'hflan_blog_admin') }}
+
+{% endif %}
+
+{% endblock %}

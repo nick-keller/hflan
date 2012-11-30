@@ -1,0 +1,25 @@
+guestbook:
+    title:
+        bundle: Guestbook
+        new_message: Donnez votre avis
+        page:
+            admin: Administration
+            index: Vos commentaires
+        aside:
+            admin: Gérer les messages
+    message:
+        success:
+            new: Votre message à bien été ajouté !
+            delete: Les messages ont bien été supprimé !
+        error:
+    field:
+        author: Pseudo
+        email: E-mail
+        rating: Note
+        message: Message
+        date: Date
+    action:
+        list: Tout les messages
+        delete: Supprimer
+        selection: Sélection
+        post: Ajouter !

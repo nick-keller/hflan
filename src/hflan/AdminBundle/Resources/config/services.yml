@@ -1,0 +1,7 @@
+parameters:
+#    hflan_admin.example.class: hflan\AdminBundle\Example
+
+services:
+#    hflan_admin.example:
+#        class: %hflan_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

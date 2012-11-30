@@ -1,0 +1,6 @@
+services:
+    hflan_info.dateformat:
+        class:        hflan\InfoBundle\Service\hflanDateFormat
+        arguments:    [@translator, %locale%]
+        tags:
+            - { name: twig.extension }

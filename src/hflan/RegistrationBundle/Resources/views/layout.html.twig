@@ -1,0 +1,19 @@
+{% extends "::layout.html.twig" %}
+
+{% set currentPage = 'register' %}
+
+{% block body %}
+<section>
+    {% for key, flash in app.session.flashes %}
+    <div class="alert alert-{{ key }}">
+        {{ flash|trans }}
+    </div>
+    {% endfor %}
+
+    <header>
+        <h1>{% block sectionTitle %}{% trans %}register.title.bundle{% endtrans %}{% endblock %}</h1>
+    </header>
+    {% block content %}
+    {% endblock %}
+</section>
+{% endblock %}

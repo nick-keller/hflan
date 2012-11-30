@@ -1,0 +1,87 @@
+@media (max-width: 1073px)
+{
+    .date{
+        position: relative;
+        float: right;
+        width: auto;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        border: solid 1px #8a930a;
+        padding: 5px 8px;
+        box-shadow: 0 0 1px rgba(255,255,255,1) inset;
+    }
+
+    .date > span{
+        display: inline;
+        font-size: 14px;
+    }
+
+    .date.settings{
+        margin: 0 -35px 0 0;
+        box-shadow: 0 0 1px rgba(255,255,255,1) inset, 3px 0 3px -3px rgba(0,0,0,1);
+    }
+}
+
+@media (max-width: 877px)
+{
+    textarea{
+        width: 100%;
+    }
+}
+
+@media (max-width: 730px)
+{
+    body > .container > .row > aside{
+        display: none;
+    }
+
+    textarea{
+        width: 350px;
+    }
+}
+
+@media (max-width: 400px)
+{
+    .date, .date.settings{
+        float: none;
+        display: inline-block;
+        background: none;
+        color: #666666;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        width: auto;
+        border: none;
+        box-shadow: none;
+    }
+
+    .date.settings{
+        border: solid 1px #444444;
+        background: #999999;
+    }
+}
+
+@media (max-width: 561px)
+{
+    textarea{
+        width: 100%;
+    }
+}
+
+@media (max-width: 398px)
+{
+    .form label{
+        display: block;
+        text-align: left;
+        float: none;
+    }
+
+    .form .form-widget{
+        margin: 0;
+    }
+
+    .form .form-action{
+        padding: 5px;
+    }
+}

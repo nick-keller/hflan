@@ -1,0 +1,11 @@
+hflan_guestbook_index:
+    pattern:  /{page}
+    defaults: { _controller: hflanGuestbookBundle:Guestbook:index, page: 1 }
+    requirements:
+        page:  \d*
+
+hflan_guestbook_admin:
+    pattern:   /admin/{page}
+    defaults:  { _controller: hflanGuestbookBundle:Guestbook:admin, page: 1 }
+    requirements:
+        page:  \d*

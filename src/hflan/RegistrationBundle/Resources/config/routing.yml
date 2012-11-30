@@ -1,0 +1,7 @@
+hflan_registration_index:
+    pattern:  /
+    defaults: { _controller: hflanRegistrationBundle:Register:index }
+
+hflan_registration_edit:
+    pattern: /edit
+    defaults: { _controller: hflanRegistrationBundle:Register:edit }

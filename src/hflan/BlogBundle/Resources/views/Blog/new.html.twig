@@ -1,0 +1,26 @@
+{% extends "hflanBlogBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}blog.title.page.new{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}blog.title.page.new{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+<h2>{% trans %}blog.title.aside.admin{% endtrans %}</h2>
+<a href="{{ path('hflan_blog_admin') }}" class="btn"><i class="icon-th-list icon-white"></i> {% trans %}blog.action.list{% endtrans %}</a>
+<hr>
+{% endblock %}
+
+{% block blog %}
+
+<form method="post" {{ form_enctype(form) }} class="form">
+    {{ form_widget(form) }}
+    <div class="form-action">
+        <button type="submit" class="btn"><i class="icon-ok icon-white"></i> {% trans %}blog.action.publish{% endtrans %}</button>
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}hf.lan{% endblock %}</title>
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/smoothness/jquery-ui-1.9.2.custom.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/icons.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" type="text/css" />
+    {% endblock %}
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.countdown.js') }}"></script>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <div class="pull-right">
+            <div class="menu-connexion">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <i class="icon-user icon-white"></i>
+                    {% if app.user.team is not null %}
+                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.team.name}, 'FOSUserBundle') }}
+                    {% else %}
+                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                    {% endif %}
+                    |
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        <i class="icon-off icon-white" style="margin-top: 2px;"></i>
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }}">
+                        <i class="icon-chevron-right icon-white"></i>
+                        {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        <a id="logo" href="{{ path('hflan_home') }}"><div></div></a>
+        <div class="lang-selection">
+            <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}"><i class="flag-france"></i></a>
+            <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}"><i class="flag-usa"></i></a>
+        </div>
+    </div>
+</header>
+<nav>
+    <ul class="container">
+        <li><a href="{{ path('hflan_home') }}" {% if currentPage == 'home' %}class="active"{% endif %}>
+            {% trans from "menu" %}home{% endtrans %}
+        </a></li>
+
+        <li><a href="{{ path('hflan_blog_list') }}" {% if currentPage == 'blog' %}class="active"{% endif %}>
+            {% trans from "menu" %}blog{% endtrans %}
+        </a></li>
+
+        <li><a href="{{ path('hflan_info_index') }}" {% if currentPage == 'info' %}class="active"{% endif %}>
+            {% trans from "menu" %}info{% endtrans %}
+        </a></li>
+
+        <li><a href="#">
+            {% trans from "menu" %}live{% endtrans %}
+        </a></li>
+
+        <li><a href="{{ path('hflan_partners_index') }}" {% if currentPage == 'partners' %}class="active"{% endif %}>
+            {% trans from "menu" %}partners{% endtrans %}
+        </a></li>
+
+        <li><a href="{{ path('hflan_guestbook_index') }}" {% if currentPage == 'guestbook' %}class="active"{% endif %}>
+            {% trans from "menu" %}guestbook{% endtrans %}
+        </a></li>
+
+        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <li><a href="{{ path('hflan_registration_index') }}" {% if currentPage == 'register' %}class="active"{% endif %}>
+            {% trans from "menu" %}register{% endtrans %}
+        </a></li>
+        {% endif %}
+
+        <li><a href="{{ path('hflan_info_contact') }}" {% if currentPage == 'contact' %}class="active"{% endif %}>
+            {% trans from "menu" %}contact{% endtrans %}
+        </a></li>
+
+        {% if is_granted("ROLE_STAFF") %}
+        <li class="pull-right"><a href="{{ path('hflan_admin_dashboard') }}" {% if currentPage == 'admin' %}class="active"{% endif %}>
+            <i class="icon-wrench icon-white"></i>
+            {% trans from "menu" %}admin{% endtrans %}
+        </a></li>
+        {% endif %}
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and app.user.team is not null %}
+        <li class="pull-right"><a href="{{ path('hflan_registration_edit') }}" {% if currentPage == 'register' %}class="active"{% endif %}>
+            <i class="icon-flag icon-white" style="margin-top: 2px;"></i>
+            {% trans from "menu" %}finalize{% endtrans %}
+        </a></li>
+        {% endif %}
+    </ul>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="content">
+            {% block body %}
+            {% endblock %}
+        </div>
+        <aside>
+            {% block administration %}{% endblock %}
+            {% render "hflanTournamentBundle:Event:menu" %}
+            {% render "hflanPartnersBundle:Partners:menu" %}
+            <h2 class="fb-title">{% trans %}join_us{% endtrans %}</h2>
+            <div class="fb-like-box" data-href="http://www.facebook.com/hf.lan.esiee" data-width="296" data-show-faces="true" data-stream="false" data-border-color="#f3f3f3" data-header="false"></div>
+        </aside>
+    </div>
+</div>
+
+<div style="display: none">
+    <div id="dialog-confirm" title="{% trans %}dialog.confirm_delete.title{% endtrans %}">
+        <p>{% trans %}dialog.confirm_delete.message{% endtrans %}</p>
+    </div>
+</div>
+
+{% block javascript %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript" src="{{ asset('js/jquery-ui-1.9.2.custom.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/global.js') }}"></script>
+{% endblock %}
+</body>
+</html>

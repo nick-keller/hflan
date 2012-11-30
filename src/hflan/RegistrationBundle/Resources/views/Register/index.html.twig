@@ -1,0 +1,24 @@
+{% extends "hflanRegistrationBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}register.title.page.index{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}register.title.page.index{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+{% endblock %}
+
+{% block content %}
+
+<form method="post" class="form form-label-large">
+    {{ form_widget(teamForm) }}
+    {{ form_widget(userForm) }}
+    <div class="form-action">
+        <button type="submit" class="btn"><i class="icon-ok icon-white"></i> {% trans %}register.action.register{% endtrans %}</button>
+    </div>
+</form>
+
+{% endblock %}

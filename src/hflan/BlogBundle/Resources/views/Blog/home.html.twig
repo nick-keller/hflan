@@ -1,0 +1,51 @@
+{% extends "::layout.html.twig" %}
+
+{% set currentPage = 'home' %}
+
+{% block title %}
+{{ parent() }} - {% trans %}blog.title.page.home{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}{% endblock%}
+
+{% block administration %}{% endblock %}
+
+{% block body %}
+<section>
+
+    {% if articles is empty %}
+    <p>{% trans %}blog.message.no_article{% endtrans %}</p>
+    {% endif %}
+
+    {% for article in articles %}
+    <div class="date"><span>{{ article.createdAt|date('d') }}</span> {{ article.createdAt|date('M') }}</div>
+
+    {% if is_granted('ROLE_NEWSER') %}
+    <div class="date settings">
+        <a href="#" rel="dropdown-toogle"><i class="icon-cog icon-white"></i></a>
+        <div class="dropdown">
+            <ul>
+                <li><a href="{{ path('hflan_blog_edit', {slug: article.slug}) }}">
+                    <i class="icon-pencil"></i>{% trans %}blog.action.edit{% endtrans %}
+                </a></li>
+                <li><a href="{{ path('hflan_blog_toggle', {slug: article.slug}) }}">
+                    <i class="icon-eye-close"></i>{% trans %}blog.action.hide{% endtrans %}
+                </a></li>
+                <li class="separator"></li>
+                <li><a href="{{ path('hflan_blog_delete', {slug: article.slug}) }}">
+                    <i class="icon-remove-sign"></i>{% trans %}blog.action.delete{% endtrans %}
+                </a></li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.content|toPlainText(200) }}</p>
+    <a class="btn-mini pull-right" href="{{ path('hflan_blog_show', { 'slug': article.slug }) }}">{% trans %}blog.action.read_more{% endtrans %}</a>
+    <div style="clear: both;"></div>
+    <hr>
+    {% endfor %}
+</section>
+
+{% endblock %}

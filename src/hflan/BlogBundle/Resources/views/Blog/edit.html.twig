@@ -1,0 +1,41 @@
+{% extends "hflanBlogBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}blog.title.page.edit{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}blog.title.page.edit{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+<h2>{% trans %}blog.title.aside.admin{% endtrans %}</h2>
+<p>
+    <a href="{{ path('hflan_blog_show', {slug: article.slug}) }}" class="btn"><i class="icon-align-left icon-white"></i> {% trans %}blog.action.view{% endtrans %}</a>
+    <a href="{{ path('hflan_blog_admin') }}" class="btn"><i class="icon-th-list icon-white"></i> {% trans %}blog.action.list{% endtrans %}</a>
+<hr>
+{% endblock %}
+
+{% block blog %}
+
+<form method="post" {{ form_enctype(form) }} class="form">
+    {{ form_row(form.title) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.lang) }}
+    {{ form_row(form.published) }}
+    {{ form_row(form.file) }}
+    {% if article.path is not empty %}
+    <div class="form-widget">
+        <img src="{{ asset(article.webPath)}}" alt="preview" class="preview-img">
+    </div>
+    {% endif %}
+    {{ form_rest(form) }}
+    <div class="form-action">
+        <button type="submit" class="btn"><i class="icon-pencil icon-white"></i> {% trans %}blog.action.edit{% endtrans %}</button>
+        {% if article.path is not empty %}
+        <a href="{{ path('hflan_blog_removeImage', {slug: article.slug}) }}" class="btn"><i class="icon-remove icon-white"></i> {% trans %}blog.action.delete_image{% endtrans %}</a>
+        {% endif %}
+    </div>
+</form>
+
+{% endblock %}

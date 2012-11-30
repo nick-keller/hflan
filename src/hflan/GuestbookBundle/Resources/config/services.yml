@@ -1,0 +1,8 @@
+parameters:
+    messages_per_page: 10
+    messages_per_page_admin: 10
+
+services:
+#    hflan_guestbook.example:
+#        class: %hflan_guestbook.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

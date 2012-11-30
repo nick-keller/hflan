@@ -1,0 +1,44 @@
+{% extends "hflanGuestbookBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}guestbook.title.bundle{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}guestbook.title.page.index{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+    {% if is_granted('ROLE_GUESTBOOK') %}
+        <h2>{% trans %}guestbook.title.aside.admin{% endtrans %}</h2>
+        <a href="{{ path('hflan_guestbook_admin') }}" class="btn"><i class="icon-th-list icon-white"></i> {% trans %}guestbook.action.list{% endtrans %}</a>
+        <hr>
+    {% endif %}
+{% endblock %}
+
+{% block guestbook %}
+
+{% for message in messages %}
+{{ message.message|nl2br|raw }}
+<div class="author">{{ message.author}} le {{ message.createdAt|date('d/m/Y') }}</div>
+<hr>
+{% endfor %}
+
+{{ pagination(page, nb_pages, 'hflan_guestbook_index') }}
+
+{% endblock %}
+
+{% block addMessage %}
+<section>
+    <header>
+        <h1>{% trans %}guestbook.title.new_message{% endtrans %}</h1>
+    </header>
+
+    <form method="post" {{ form_enctype(form) }} class="form">
+        {{ form_widget(form) }}
+        <div class="form-action">
+            <button type="submit" class="btn"><i class="icon-ok icon-white"></i> {% trans %}guestbook.action.post{% endtrans %}</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

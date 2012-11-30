@@ -1,0 +1,45 @@
+blog:
+    title:
+        bundle: Blog
+        page:
+            index: All articles
+            show: Read article
+            new: New article
+            edit: Edit article
+            home: Home
+            admin: Admin
+        aside:
+            admin: Admin actions
+    message:
+        no_article: There is no article yet
+        success:
+            hide_batch: Articles have been successfully hidden!
+            publish_batch: Articles have been successfully added!
+            delete_batch: Articles have been successfully deleted!
+            delete: Article deleted!
+            toggle: The article's visibility have been modified!
+            delete_image: The picture have been successfully deleted!
+            edit: Modifications saved!
+            new: Article have been successfully added!
+        error:
+        alert:
+            hidden: <h4>Attention !</h4> <p>Cet article est caché, les utilisateurs ne pourrons pas le voire.</p>
+    field:
+        title: Title
+        date: Date
+        author: Author
+        content: Article
+        visible: Visible
+        image: Image
+        lang: Language
+    action:
+        new: New
+        list: All articles
+        read_more: Read more...
+        edit: Edit
+        hide: Hide
+        delete: Delete
+        publish: Publish
+        back_to_list: « All articles
+        selection: Selection
+        view: View

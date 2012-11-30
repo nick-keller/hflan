@@ -1,0 +1,17 @@
+parameters:
+    articles_on_homepage: 3
+    articles_per_page: 6
+    articles_per_page_admin : 20
+
+services:
+    hflan_blog.slugify:
+        class: hflan\BlogBundle\Service\hflanSlugify
+    hflan_blog.textFormat:
+        class: hflan\BlogBundle\Service\hflanTextFormat
+        tags:
+            - { name: twig.extension }
+    hflan_blog.pager:
+        class: hflan\BlogBundle\Service\hflanPager
+        arguments: [@router]
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,22 @@
+{% extends "::layout.html.twig" %}
+
+{% set currentPage = 'guestbook' %}
+
+{% block body %}
+<section>
+    {% for key, flash in app.session.flashes %}
+    <div class="alert alert-{{ key }}">
+        {{ flash|trans }}
+    </div>
+    {% endfor %}
+
+    <header>
+        <h1>{% block sectionTitle %}{% trans %}guestbook.title.bundle{% endtrans %}{% endblock %}</h1>
+    </header>
+    {% block guestbook %}
+    {% endblock %}
+</section>
+
+{% block addMessage %}{% endblock %}
+
+{% endblock %}

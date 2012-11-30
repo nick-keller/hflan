@@ -1,0 +1,35 @@
+{% extends "hflanUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+<header>
+    <h1>{% trans %}page.connexion{% endtrans %}</h1>
+</header>
+
+{% if error %}
+<div class="alert alert-error">{{ error|trans({}, 'FOSUserBundle') }}</div>
+{% endif %}
+
+<form class="form form-label-large" action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+    <div class="form-widget">
+        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+    </div>
+
+    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+    <div class="form-widget">
+        <input type="password" id="password" name="_password" required="required" />
+    </div>
+
+    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+    <div class="form-widget">
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    </div>
+
+    <div class="form-action">
+        <input class="btn" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+    </div>
+</form>
+{% endblock fos_user_content %}
