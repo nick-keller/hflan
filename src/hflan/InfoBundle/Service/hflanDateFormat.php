@@ -17,6 +17,7 @@ class hflanDateFormat extends \Twig_Extension
     {
         return array(
             'toHuman' => new \Twig_Filter_Method($this, 'toHuman'),
+            'toDate' => new \Twig_Filter_Method($this, 'toDate'),
         );
     }
 
@@ -69,6 +70,14 @@ class hflanDateFormat extends \Twig_Extension
             return $this->trans->trans("date.$time.Xmin", array('%x%'=> $diff->i));
         else
             return $this->trans->trans("date.$time.Xsec", array('%x%'=> $diff->s));
+    }
+
+    public function toDate(\DateTime $date = null)
+    {
+        if($date === null)
+            return '';
+
+        return $this->locale == 'fr' ? $date->format('d/m/Y') : $date->format('m/d/Y');
     }
 
     public function getName()

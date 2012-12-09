@@ -32,7 +32,7 @@
         {% for article in articles %}
         <tr href="{{ path('hflan_blog_edit', {'slug': article.slug}) }}" class="selectable">
             <td>{{ form_widget(form[article.id]) }} {{ article.title }}</td>
-            <td>{{ article.createdAt|date('d/m/Y')}}</td>
+            <td>{{ article.createdAt|toDate }}</td>
             <td>{{ article.author.username }}</td>
             <td>
                 {% if article.lang == "fr" %}

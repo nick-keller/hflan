@@ -5,10 +5,11 @@ namespace hflan\RegistrationBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use hflan\UserBundle\Form\UserType;
-use hflan\TournamentBundle\Form\RegisterTeamType;
 use hflan\TournamentBundle\Entity\Team;
-use \hflan\TournamentBundle\Form\EditTeamType;
-use \hflan\TournamentBundle\Form\PlayerType;
+use hflan\TournamentBundle\Entity\Player;
+use hflan\TournamentBundle\Form\RegisterTeamType;
+use hflan\TournamentBundle\Form\EditTeamType;
+use hflan\TournamentBundle\Form\PlayerType;
 
 class RegisterController extends Controller
 {
@@ -17,6 +18,18 @@ class RegisterController extends Controller
         if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED'))
             return $this->redirect( $this->generateUrl('hflan_home') );
 
+        $nextEvent = $this->getDoctrine()->getRepository('hflanTournamentBundle:Event')->getNextEvent();
+
+        if ($nextEvent == null ||
+            !$nextEvent->getOpen() ||
+            $nextEvent->getOpenAt() > new \DateTime() ||
+            $nextEvent->getCloseAt() < new \DateTime())
+        {
+            return $this->render('hflanRegistrationBundle:Register:error.html.twig', array(
+                'nextEvent' => $nextEvent,
+            ));
+        }
+
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
 
@@ -24,7 +37,7 @@ class RegisterController extends Controller
         $team->setUser($user);
 
         $userForm = $this->createForm(new UserType, $user);
-        $teamForm = $this->createForm(new RegisterTeamType($this->getDoctrine()->getRepository('hflanTournamentBundle:Event')->getNextEvent()), $team);
+        $teamForm = $this->createForm(new RegisterTeamType($nextEvent), $team);
 
         $request = $this->get('request');
         if( $request->getMethod() == 'POST' )
@@ -41,8 +54,19 @@ class RegisterController extends Controller
                 if(!$team->getName())
                     $team->setName('single player');
 
+                $players = array();
+                for($i=0; $i < $team->getTournament()->getPlayersPerTeam(); ++$i)
+                {
+                    $players[] = new Player();
+                    $players[$i]->setTeam($team);
+                }
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($team);
+
+                foreach($players as $player)
+                    $em->persist($player);
+
                 $em->flush();
 
                 $this->get('session')->setFlash('success', 'register.message.success.create_team');
@@ -63,6 +87,9 @@ class RegisterController extends Controller
      */
     public function editAction()
     {
+        if($this->container->get('security.context')->getToken()->getUser()->getTeam() === null)
+            return $this->redirect( $this->generateUrl('hflan_home') );
+
         $teamForm = $this->createForm(new EditTeamType, $this->container->get('security.context')->getToken()->getUser()->getTeam());
         //$playerList = $this->container->get('security.context')->getToken()->getUser()->getTeam()->getPlayers();
 

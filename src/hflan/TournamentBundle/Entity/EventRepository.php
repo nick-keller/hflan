@@ -34,4 +34,25 @@ class EventRepository extends EntityRepository
             return null;
         }
     }
+
+    public function getCurrentEvent()
+    {
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->select('a')
+            ->where('a.start_at < :now')
+            ->andWhere('a.end_at > :now')
+                ->setParameter('now', new \Datetime)
+            ->setMaxResults(1);
+
+        $query = $queryBuilder->getQuery();
+
+        try
+        {
+            return $query->getSingleResult(AbstractQuery::HYDRATE_OBJECT);
+        }
+        catch(NoResultException $e)
+        {
+            return null;
+        }
+    }
 }

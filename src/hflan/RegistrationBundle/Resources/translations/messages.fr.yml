@@ -3,6 +3,8 @@ register:
         bundle: Inscriptions
         page:
             index: S'inscrire à un tournois
+            edit: Finaliser mon inscription
+            error: Impossible de s'inscrir
         aside:
             admin: Administration
     message:

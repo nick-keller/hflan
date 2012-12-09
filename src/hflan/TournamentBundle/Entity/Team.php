@@ -56,13 +56,13 @@ class Team
     private $tournament;
 
     /**
-     * @ORM\OneToOne(targetEntity="hflan\UserBundle\Entity\User", inversedBy="team")
+     * @ORM\OneToOne(targetEntity="hflan\UserBundle\Entity\User", inversedBy="team", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="hflan\TournamentBundle\Entity\Player", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="hflan\TournamentBundle\Entity\Player", mappedBy="team", cascade={"remove"})
      */
     protected $players;
 

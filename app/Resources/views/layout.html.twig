@@ -63,7 +63,7 @@
             {% trans from "menu" %}info{% endtrans %}
         </a></li>
 
-        <li><a href="#">
+        <li><a href="{{ path('hflan_tournament_live') }}" {% if currentPage == 'live' %}class="active"{% endif %}>
             {% trans from "menu" %}live{% endtrans %}
         </a></li>
 

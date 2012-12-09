@@ -50,18 +50,37 @@
 <h2>{% trans %}tournament.title.page.register.edit{% endtrans %}</h2>
 
 <form method="post" class="form form-label-large">
-    <table class="table">
-        <tr>
-            <td>
-                {{ form_widget(teamForm) }}
-            </td>
-        </tr>
-    </table>
 
-    <div class="form-action">
+    {{ form_label(teamForm.name) }}
+    <div class="form-widget">
+        {{ form_widget(teamForm.name) }}
         <button type="submit" class="btn"><i class="icon-ok icon-white"></i> {% trans %}register.action.save{% endtrans %}</button>
     </div>
 
 </form>
+
+{% for player in team.players %}
+    <div class="embedded-form" style="padding: 10px;">
+        <div>
+            <p>
+                {% trans %}tournament.field.firstname{% endtrans %} :
+                {{ player.firstname }} <br>
+                {% trans %}tournament.field.lastname{% endtrans %} :
+                {{ player.lastname }} <br>
+                {% trans %}tournament.field.nickname{% endtrans %} :
+                {{ player.nickname }} <br>
+                {% trans %}tournament.field.email{% endtrans %} :
+                {{ player.email }} <br>
+                {% trans %}tournament.field.birthday{% endtrans %} :
+                {{ player.birthday|toDate }} <br>
+                {% trans %}tournament.field.pcType{% endtrans %} :
+                {{ player.pcType }} <br>
+            </p>
+        </div>
+        <div>
+            hello
+        </div>
+    </div>
+{% endfor %}
 
 {% endblock %}

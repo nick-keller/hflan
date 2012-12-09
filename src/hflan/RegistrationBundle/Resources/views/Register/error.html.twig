@@ -1,0 +1,26 @@
+{% extends "hflanRegistrationBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}register.title.page.error{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ parent() }} <small>{% trans %}register.title.page.error{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+{% endblock %}
+
+{% block content %}
+
+{% if nextEvent == null %}
+    {% trans %}tournament.message.register.no_tournament{% endtrans %}
+{% elseif not nextEvent.open %}
+    {% trans %}tournament.message.register.unknown{% endtrans %}
+{% elseif nextEvent.openAt > date('now') %}
+    {% trans with {'%date%':nextEvent.openAt|toHuman} %}tournament.message.register.soon{% endtrans %}
+{% elseif nextEvent.closeAt < date('now') %}
+    {% trans %}tournament.message.register.close{% endtrans %}
+{% endif %}
+
+{% endblock %}

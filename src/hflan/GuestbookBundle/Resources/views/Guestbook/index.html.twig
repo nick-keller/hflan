@@ -20,7 +20,7 @@
 
 {% for message in messages %}
 {{ message.message|nl2br|raw }}
-<div class="author">{{ message.author}} le {{ message.createdAt|date('d/m/Y') }}</div>
+<div class="author">{{ message.author}} le {{ message.createdAt|toDate }}</div>
 <hr>
 {% endfor %}
 

@@ -58,11 +58,11 @@ class Tournament
     private $price;
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="bnet", type="boolean")
+     * @ORM\Column(name="embedded_player", type="text")
      */
-    private $useBnet;
+    private $embeddedPlayer;
 
     /**
      * @var boolean
@@ -82,12 +82,28 @@ class Tournament
      */
     protected $teams;
 
-    public function __construct()
+    /**
+     * @ORM\OneToMany(targetEntity="hflan\TournamentBundle\Entity\CustomField", mappedBy="tournament")
+     */
+    protected $customFields;
+
+    public function __construct($type)
     {
         $this->name = "Tournoi ";
         $this->nbrTeams = 16;
         $this->playersPerTeam = 1;
         $this->teams = new ArrayCollection();
+        $this->customFields = new ArrayCollection();
+
+        if($type == 'casu')
+        {
+            $this->setName('Freeplay/Visiteur');
+            $this->setNbrTeams(40);
+            $this->setCasu(true);
+            $this->setPlayersPerTeam(1);
+            $this->setGame('none');
+            $this->setPrice(0);
+        }
     }
 
     public function __toString()
@@ -249,29 +265,6 @@ class Tournament
     }
 
     /**
-     * Set useBnet
-     *
-     * @param boolean $useBnet
-     * @return Tournament
-     */
-    public function setUseBnet($useBnet)
-    {
-        $this->useBnet = $useBnet;
-    
-        return $this;
-    }
-
-    /**
-     * Get useBnet
-     *
-     * @return boolean 
-     */
-    public function getUseBnet()
-    {
-        return $this->useBnet;
-    }
-
-    /**
      * Add teams
      *
      * @param \hflan\TournamentBundle\Entity\Team $teams
@@ -302,5 +295,51 @@ class Tournament
     public function getTeams()
     {
         return $this->teams;
+    }
+
+    /**
+     * Set casu
+     *
+     * @param boolean $casu
+     * @return Tournament
+     */
+    public function setCasu($casu)
+    {
+        $this->casu = $casu;
+    
+        return $this;
+    }
+
+    /**
+     * Get casu
+     *
+     * @return boolean 
+     */
+    public function getCasu()
+    {
+        return $this->casu;
+    }
+
+    /**
+     * Set embeddedPlayer
+     *
+     * @param string $embeddedPlayer
+     * @return Tournament
+     */
+    public function setEmbeddedPlayer($embeddedPlayer)
+    {
+        $this->embeddedPlayer = $embeddedPlayer;
+    
+        return $this;
+    }
+
+    /**
+     * Get embeddedPlayer
+     *
+     * @return string 
+     */
+    public function getEmbeddedPlayer()
+    {
+        return $this->embeddedPlayer;
     }
 }

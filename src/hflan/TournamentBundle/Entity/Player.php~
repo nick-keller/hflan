@@ -3,6 +3,7 @@
 namespace hflan\TournamentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Player
@@ -25,6 +26,8 @@ class Player
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=127)
+     * @Assert\MinLength(2)
+     * @Assert\MaxLength(127)
      */
     private $firstname;
 
@@ -32,6 +35,8 @@ class Player
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=127)
+     * @Assert\MinLength(2)
+     * @Assert\MaxLength(127)
      */
     private $lastname;
 
@@ -39,6 +44,8 @@ class Player
      * @var string
      *
      * @ORM\Column(name="nickname", type="string", length=127)
+     * @Assert\MinLength(2)
+     * @Assert\MaxLength(127)
      */
     private $nickname;
 
@@ -46,13 +53,23 @@ class Player
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=127)
+     * @Assert\Email(checkMX = true)
      */
     private $email;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthday", type="date")
+     * @Assert\Date()
+     */
+    private $birthday;
 
     /**
      * @var string
      *
      * @ORM\Column(name="pc_type", type="string", length=127)
+     * @Assert\Choice(choices = {"Descktop", "Laptop"})
      */
     private $pc_type;
 
@@ -186,5 +203,28 @@ class Player
     public function getPcType()
     {
         return $this->pc_type;
+    }
+
+    /**
+     * Set team
+     *
+     * @param \hflan\TournamentBundle\Entity\Team $team
+     * @return Player
+     */
+    public function setTeam(\hflan\TournamentBundle\Entity\Team $team)
+    {
+        $this->team = $team;
+    
+        return $this;
+    }
+
+    /**
+     * Get team
+     *
+     * @return \hflan\TournamentBundle\Entity\Team 
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 }

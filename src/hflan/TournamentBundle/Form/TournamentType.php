@@ -16,7 +16,8 @@ class TournamentType extends AbstractType
             ->add('nbrTeams', null, array('label'=>'tournament.field.nbrTeams'))
             ->add('playersPerTeam', null, array('label'=>'tournament.field.playersPerTeam'))
             ->add('price', null, array('label'=>'tournament.field.price', 'attr'=>array('placeholder'=>'€')))
-            ->add('useBnet', null, array('label'=>'tournament.field.bnet', 'required'=>false))
+            ->add('embeddedPlayer', null, array('label'=>'tournament.field.embeddedPlayer', 'required'=>false))
+            ->add('customFields', 'collection', array('label'=>'tournament.field.customFields', 'type' => new CustomFieldType(), 'allow_add'  => true, 'allow_delete' => true, 'by_reference' => false))
         ;
     }
 

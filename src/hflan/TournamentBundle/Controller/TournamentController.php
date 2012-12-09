@@ -44,6 +44,7 @@ class TournamentController extends Controller
         return $this->render('hflanTournamentBundle:Tournament:new.html.twig', array(
             'event' => $event,
             'form' => $form->createView(),
+            'type' => $type,
         ));
     }
 
@@ -70,7 +71,13 @@ class TournamentController extends Controller
         if($tournament->getCasu())
             $form = $this->createForm(new CasuType, $tournament);
         else
+        {
             $form = $this->createForm(new TournamentType, $tournament);
+
+            $originalCustomFields = array();
+            foreach($tournament->getCustomFields() as $field)
+                $originalCustomFields[] = $field;
+        }
 
         $request = $this->get('request');
         if( $request->getMethod() == 'POST' )
@@ -78,7 +85,16 @@ class TournamentController extends Controller
             $form->bind($request);
             if( $form->isValid() )
             {
+                foreach($tournament->getCustomFields() as $field)
+                    foreach($originalCustomFields as $key => $toDel)
+                        if($toDel->getId() === $field->getId())
+                            unset($originalCustomFields[$key]);
+
                 $em = $this->getDoctrine()->getManager();
+
+                foreach($originalCustomFields as $field)
+                    $em->remove($field);
+
                 $em->persist($tournament);
                 $em->flush();
 
@@ -92,6 +108,7 @@ class TournamentController extends Controller
         return $this->render('hflanTournamentBundle:Tournament:edit.html.twig', array(
             'form' => $form->createView(),
             'tournament' => $tournament,
+            'type' => $tournament->getCasu() ? 'casu' : 'default',
         ));
     }
 }

@@ -20,7 +20,7 @@ class RegisterTeamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label'=>'tournament.field.team_name', 'required'=>false, 'attr'=>array('title'=>'tournament.field.message.team_name')))
+            ->add('name', null, array('label'=>'tournament.field.team_name', 'attr'=>array('title'=>'tournament.field.message.team_name')))
             ->add('tournament', 'entity', array(
                 'label'=>'tournament.field.tournament',
                 'class'=>'hflanTournamentBundle:Tournament',

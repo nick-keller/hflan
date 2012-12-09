@@ -3,6 +3,7 @@
 {% set currentPage = 'admin' %}
 
 {% block body %}
+{% block tabs %}{% endblock %}
 <section>
     {% for key, flash in app.session.flashes %}
     <div class="alert alert-{{ key }}">

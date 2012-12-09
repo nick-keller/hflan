@@ -30,6 +30,27 @@ $("a[href*=delete]").click(function(e) {
     $("#dialog-confirm").dialog("open");
 });
 
+// collection form
+$('*[data-action=add-embedded-form]').click(function(){
+    var parent = $(this).parent();
+    var index = '';
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for(var i=0; i < 5; ++i)
+        index += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    var element = $(parent.attr('data-prototype').replace(/__name__/g, index));
+    parent.prepend(element);
+
+    element.find('.del-btn').click(function(){
+        $(this).parent().animate({opacity: 0, padding: 0, height: 0}, 500, function(){$(this).remove()});
+    });
+});
+
+$('.del-btn').click(function(){
+    $(this).parent().animate({opacity: 0, padding: 0, height: 0}, 500, function(){$(this).remove()});
+});
+
 // table
 $('tr[href]:not(.selectable) td').click(function(){window.location.href=$(this).parent().attr('href');});
 

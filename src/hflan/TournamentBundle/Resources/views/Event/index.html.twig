@@ -31,13 +31,13 @@
         <td>{{ event.price }} €</td>
 
         {% if event.public %}
-        <td>{{ event.startAt|date('d/m/Y') }}</td>
+        <td>{{ event.startAt|toDate }}</td>
         {% else %}
         <td><i class="icon-eye-close"></i></td>
         {% endif %}
 
         {% if event.open %}
-        <td>{{ event.openAt|date('d/m/Y') }}</td>
+        <td>{{ event.openAt|toDate }}</td>
         {% else %}
         <td><i class="icon-eye-close"></i></td>
         {% endif %}

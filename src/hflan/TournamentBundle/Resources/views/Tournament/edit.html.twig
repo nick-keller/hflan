@@ -19,7 +19,31 @@
 {% block content %}
 
 <form method="post" {{ form_enctype(form) }} class="form form-label-large">
-    {{ form_widget(form) }}
+    {% if type == 'casu' %}
+        {{ form_widget(form) }}
+    {% else %}
+        {{ form_row(form.name) }}
+        {{ form_row(form.game) }}
+        {{ form_row(form.nbrTeams) }}
+        {{ form_row(form.playersPerTeam) }}
+        {{ form_row(form.price) }}
+        {{ form_row(form.embeddedPlayer) }}
+        {{ form_label(form.customFields) }}
+        <div class="form-widget" data-prototype="&lt;div class=&quot;embedded-form&quot;>&lt;a class=&quot;del-btn&quot;>x&lt;/a>{{ form_widget(form.customFields.vars.prototype)|e }}&lt;/div>">
+            {{ form_errors(form.customFields) }}
+            {% for field in form.customFields %}
+            <div class="embedded-form">
+                <a class="del-btn">x</a>
+                {{ form_widget(field) }}
+            </div>
+            {% endfor %}
+            <a class="btn" data-action="add-embedded-form"><i class="icon-plus icon-white"></i> {% trans %}tournament.action.add{% endtrans %}</a>
+        </div>
+        {% if form.customFields is empty %}
+            {{ form_widget(form.customFields)}}
+        {% endif %}
+        {{ form_rest(form) }}
+    {% endif %}
     <div class="form-action">
         <button type="submit" class="btn"><i class="icon-ok icon-white"></i> {% trans %}tournament.action.save{% endtrans %}</button>
     </div>

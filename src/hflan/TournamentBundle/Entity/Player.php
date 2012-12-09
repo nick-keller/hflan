@@ -3,6 +3,7 @@
 namespace hflan\TournamentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Player
@@ -24,35 +25,51 @@ class Player
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=127)
+     * @ORM\Column(name="firstname", type="string", length=127, nullable=true)
+     * @Assert\MinLength(2)
+     * @Assert\MaxLength(127)
      */
     private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=127)
+     * @ORM\Column(name="lastname", type="string", length=127, nullable=true)
+     * @Assert\MinLength(2)
+     * @Assert\MaxLength(127)
      */
     private $lastname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=127)
+     * @ORM\Column(name="nickname", type="string", length=127, nullable=true)
+     * @Assert\MinLength(2)
+     * @Assert\MaxLength(127)
      */
     private $nickname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=127)
+     * @ORM\Column(name="email", type="string", length=127, nullable=true)
+     * @Assert\Email(checkMX = true)
      */
     private $email;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthday", type="date", nullable=true)
+     * @Assert\Date()
+     */
+    private $birthday;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="pc_type", type="string", length=127)
+     * @ORM\Column(name="pc_type", type="string", length=127, nullable=true)
+     * @Assert\Choice(choices = {"Descktop", "Laptop"})
      */
     private $pc_type;
 
@@ -209,5 +226,28 @@ class Player
     public function getTeam()
     {
         return $this->team;
+    }
+
+    /**
+     * Set birthday
+     *
+     * @param \DateTime $birthday
+     * @return Player
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+    
+        return $this;
+    }
+
+    /**
+     * Get birthday
+     *
+     * @return \DateTime 
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
     }
 }

@@ -8,6 +8,7 @@ tournament:
                 new: Nouvelle LAN
                 show: Liste des tournois
                 edit: Edition de la LAN
+                live: Stream
             tournament:
                 new: Nouveau tournois
                 show: Détails
@@ -28,11 +29,13 @@ tournament:
     message:
         success:
         error:
+            no_stream: Il n'y a aucun stream pour le moment.
         register:
             unknown: La date des inscriptions n'est pas encore fixé. Les inscriptions débutent généralement un mois avant le début d'une lan.
             soon: Les inscriptions ouvrrirons %date%.
             open: Dépéchez vous les inscriptions ferment %date% !
             close: Les inscriptions sont fermés.
+            no_tournament: La date du prochain tournois n'a pas encore été fixé.
         no_tournament: Il n'y a pas encore de tournoi. Cliquez sur <b>Ajouter un tournoi</b>.
         no_confirmed_team: Aucune équipe n'a validé son inscription.
         no_pending_team: Aucne équipe dans la liste d'attente.
@@ -60,6 +63,15 @@ tournament:
         bnet: Utilise Bnet
         casu: Visiteurs
         nbrVisitor: Nombre de visiteurs
+        embeddedPlayer: HTML du Stream
+        customFields: Champs spéciaux
+        validation: Règle de validation
+        firstname: Prénom
+        lastname: Nom
+        nickname: Pseudo
+        email: Email
+        birthday: Date de naissance
+        pcType: Type d'ordinateur
         message:
             team_name: Pour les tournois individuels indiquez ici votre pseudo.
     action:
@@ -72,3 +84,4 @@ tournament:
         delete: Supprimer
         add_tournament: Ajouter un tournoi
         add_casu: Freeplay
+        add: Ajouter

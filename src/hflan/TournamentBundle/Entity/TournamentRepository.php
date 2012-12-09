@@ -32,9 +32,19 @@ class TournamentRepository extends EntityRepository
             ->leftJoin('a.teams', 'tp', 'WITH', 'tp.confirmed = false')
             ->where('a.event = :event')
                 ->setParameter('event', $event)
-            ->addGroupBy('a.id')
-        ;
+            ->addGroupBy('a.id');
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function getTournamentWithEmbeddedPlayer(Event $event = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->select('a')
+            ->where('a.event = :event')
+                ->setParameter('event', $event)
+            ->andWhere('LENGTH(a.embeddedPlayer) != 0');
+
+        return $queryBuilder->getQuery()->getResult(AbstractQuery::HYDRATE_OBJECT);
     }
 }

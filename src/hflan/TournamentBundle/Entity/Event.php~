@@ -25,7 +25,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=127)
+     * @ORM\Column(name="name", type="string", unique=true, length=127)
      * @Assert\NotBlank()
      */
     private $name;
@@ -33,7 +33,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=127)
+     * @ORM\Column(name="slug", type="string", unique=true, length=127)
      * @Assert\NotBlank()
      */
     private $slug;
@@ -94,6 +94,11 @@ class Event
      */
     private $public;
 
+    /**
+     * @ORM\OneToMany(targetEntity="hflan\TournamentBundle\Entity\Tournament", mappedBy="event")
+     */
+    protected $tournaments;
+
     public function __construct()
     {
         $this->start_at = new \Datetime();
@@ -102,10 +107,17 @@ class Event
         $this->end_at->setTime(17, 0);
         $this->open_at = new \Datetime();
         $this->open_at->setTime(10, 0);
+        $this->close_at = new \Datetime();
+        $this->close_at->setTime(23, 59);
         $this->name = "hf.lan";
         $this->slug = " ";
+        $this->tournaments = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -299,5 +311,28 @@ class Event
     public function getOpen()
     {
         return $this->open;
+    }
+
+    /**
+     * Set close_at
+     *
+     * @param \DateTime $closeAt
+     * @return Event
+     */
+    public function setCloseAt($closeAt)
+    {
+        $this->close_at = $closeAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get close_at
+     *
+     * @return \DateTime 
+     */
+    public function getCloseAt()
+    {
+        return $this->close_at;
     }
 }

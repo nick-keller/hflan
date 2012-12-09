@@ -126,4 +126,18 @@ class EventController extends Controller
             'nextEvent' => $nextEvent,
         ));
     }
+
+    public function liveAction()
+    {
+        $repEvent = $this->getDoctrine()
+            ->getRepository('hflanTournamentBundle:Event');
+
+        $tournaments = $this->getDoctrine()
+            ->getRepository('hflanTournamentBundle:Tournament')
+            ->getTournamentWithEmbeddedPlayer($repEvent->getCurrentEvent());
+
+        return $this->render('hflanTournamentBundle:Event:live.html.twig', array(
+            'tournaments' => $tournaments,
+        ));
+    }
 }

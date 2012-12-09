@@ -198,4 +198,37 @@ class Team
     {
         return $this->created_at;
     }
+
+    /**
+     * Add players
+     *
+     * @param \hflan\TournamentBundle\Entity\Player $players
+     * @return Team
+     */
+    public function addPlayer(\hflan\TournamentBundle\Entity\Player $players)
+    {
+        $this->players[] = $players;
+    
+        return $this;
+    }
+
+    /**
+     * Remove players
+     *
+     * @param \hflan\TournamentBundle\Entity\Player $players
+     */
+    public function removePlayer(\hflan\TournamentBundle\Entity\Player $players)
+    {
+        $this->players->removeElement($players);
+    }
+
+    /**
+     * Get players
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlayers()
+    {
+        return $this->players;
+    }
 }

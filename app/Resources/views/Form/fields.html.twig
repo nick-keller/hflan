@@ -1,6 +1,5 @@
 {% block form_row %}
 {% spaceless %}
-<div style="clear:both;"></div>
     {{ form_label(form) }}
 <div class="form-widget">
     {{ form_widget(form) }}
@@ -20,3 +19,12 @@
 {% endif %}
 {% endspaceless %}
 {% endblock field_errors %}
+
+{% block collection_widget %}
+{% spaceless %}
+    {% if prototype is defined %}
+        {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
+    {% endif %}
+    {{ block('form_widget') }}
+{% endspaceless %}
+{% endblock collection_widget %}

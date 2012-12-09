@@ -15,6 +15,7 @@ class PlayerType extends AbstractType
             ->add('lastname', null, array('required'=>false))
             ->add('nickname', null, array('required'=>false))
             ->add('email', null, array('required'=>false))
+            ->add('birthday', 'date', array('label'=>'tournament.field.birthday', 'widget'=>'single_text', 'date_format'=>'dd/MM/yyyy'))
             ->add('pc_type', 'choice', array('choices'=>array('Descktop', 'Laptop')))
         ;
     }

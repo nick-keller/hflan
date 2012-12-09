@@ -3,6 +3,7 @@
 namespace hflan\TournamentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -26,6 +27,7 @@ class Tournament
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=127)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -33,6 +35,7 @@ class Tournament
      * @var string
      *
      * @ORM\Column(name="game", type="string", length=127)
+     * @Assert\NotBlank()
      */
     private $game;
 
@@ -40,6 +43,7 @@ class Tournament
      * @var integer
      *
      * @ORM\Column(name="nbrTeams", type="integer")
+     * @Assert\NotBlank()
      */
     private $nbrTeams;
 
@@ -47,6 +51,7 @@ class Tournament
      * @var integer
      *
      * @ORM\Column(name="playersPerTeam", type="integer")
+     * @Assert\NotBlank()
      */
     private $playersPerTeam;
 
@@ -54,15 +59,16 @@ class Tournament
      * @var integer
      *
      * @ORM\Column(name="price", type="integer")
+     * @Assert\NotBlank()
      */
     private $price;
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="bnet", type="boolean")
+     * @ORM\Column(name="embedded_player", type="text", nullable=true)
      */
-    private $useBnet;
+    private $embeddedPlayer;
 
     /**
      * @var boolean
@@ -72,15 +78,20 @@ class Tournament
     private $casu;
 
     /**
-     * @ORM\ManyToOne(targetEntity="hflan\TournamentBundle\Entity\Event")
+     * @ORM\ManyToOne(targetEntity="hflan\TournamentBundle\Entity\Event", inversedBy="tournaments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $event;
 
     /**
-     * @ORM\OneToMany(targetEntity="hflan\TournamentBundle\Entity\Team", mappedBy="tournament")
+     * @ORM\OneToMany(targetEntity="hflan\TournamentBundle\Entity\Team", mappedBy="tournament", cascade={"remove"})
      */
     protected $teams;
+
+    /**
+     * @ORM\OneToMany(targetEntity="hflan\TournamentBundle\Entity\CustomField", mappedBy="tournament", cascade={"persist", "remove"})
+     */
+    protected $customFields;
 
     public function __construct($type)
     {
@@ -88,6 +99,8 @@ class Tournament
         $this->nbrTeams = 16;
         $this->playersPerTeam = 1;
         $this->teams = new ArrayCollection();
+        $this->customFields = new ArrayCollection();
+        $this->casu = false;
 
         if($type == 'casu')
         {
@@ -97,7 +110,6 @@ class Tournament
             $this->setPlayersPerTeam(1);
             $this->setGame('none');
             $this->setPrice(0);
-            $this->setUseBnet(false);
         }
     }
 
@@ -260,29 +272,6 @@ class Tournament
     }
 
     /**
-     * Set useBnet
-     *
-     * @param boolean $useBnet
-     * @return Tournament
-     */
-    public function setUseBnet($useBnet)
-    {
-        $this->useBnet = $useBnet;
-    
-        return $this;
-    }
-
-    /**
-     * Get useBnet
-     *
-     * @return boolean 
-     */
-    public function getUseBnet()
-    {
-        return $this->useBnet;
-    }
-
-    /**
      * Add teams
      *
      * @param \hflan\TournamentBundle\Entity\Team $teams
@@ -336,5 +325,62 @@ class Tournament
     public function getCasu()
     {
         return $this->casu;
+    }
+
+    /**
+     * Set embeddedPlayer
+     *
+     * @param string $embeddedPlayer
+     * @return Tournament
+     */
+    public function setEmbeddedPlayer($embeddedPlayer)
+    {
+        $this->embeddedPlayer = $embeddedPlayer;
+    
+        return $this;
+    }
+
+    /**
+     * Get embeddedPlayer
+     *
+     * @return string 
+     */
+    public function getEmbeddedPlayer()
+    {
+        return $this->embeddedPlayer;
+    }
+
+    /**
+     * Add customFields
+     *
+     * @param \hflan\TournamentBundle\Entity\CustomField $customFields
+     * @return Tournament
+     */
+    public function addCustomField(\hflan\TournamentBundle\Entity\CustomField $customFields)
+    {
+        $customFields->setTournament($this);
+        $this->customFields[] = $customFields;
+    
+        return $this;
+    }
+
+    /**
+     * Remove customFields
+     *
+     * @param \hflan\TournamentBundle\Entity\CustomField $customFields
+     */
+    public function removeCustomField(\hflan\TournamentBundle\Entity\CustomField $customFields)
+    {
+        $this->customFields->removeElement($customFields);
+    }
+
+    /**
+     * Get customFields
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCustomFields()
+    {
+        return $this->customFields;
     }
 }

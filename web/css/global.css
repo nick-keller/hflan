@@ -630,11 +630,11 @@ body > .container > .row > aside h2.fb-title{
     text-align: right;
     float: left;
     padding-top: 3px;
-    clear: left;
 }
 
 .form .form-widget{
     margin: 0 0 10px 110px;
+    min-height: 28px;
 }
 
 .form-action{
@@ -717,6 +717,55 @@ select{
 
 option{
     background: #fefefe;
+}
+
+.embedded-form{
+    background: #f9f9f9;
+    border: solid 1px #aca592;
+    padding: 15px 0 5px 0;
+    margin-bottom: 5px;
+    box-shadow: 0 0 0 1px white inset;
+}
+
+.embedded-form .del-btn{
+    float: right;
+    background: white;
+    display: none;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -15px;
+    border-left: solid 1px #aca592;
+    border-bottom: solid 1px #aca592;
+    cursor: pointer;
+}
+
+.embedded-form:hover .del-btn{
+    display: block;
+}
+
+.embedded-form .del-btn:hover{
+    text-decoration: none;
+    background: #f1f1f1;
+}
+
+.embedded-form > div{
+    display: inline-block;
+    border-right: solid 1px #aca592;
+    box-shadow: -1px 0 0 white inset;
+    vertical-align: top;
+    margin-right: 20px;
+}
+
+.embedded-form > div:first-child{
+    width: 50%;
+}
+
+.embedded-form > div:last-child{
+    border-right: none;
+    box-shadow: none;
 }
 
 .ui-spinner input{
@@ -914,6 +963,14 @@ input[name*=date] + div:before{
     padding-bottom: 3px;
     margin-bottom: -3px;
     cursor: default;
+}
+
+.tab-content > div{
+    display: none;
+}
+
+.tab-content > div.active{
+    display: block;
 }
 
 .menu-connexion{

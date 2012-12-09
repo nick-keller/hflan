@@ -1,0 +1,40 @@
+{% extends "hflanTournamentBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}tournament.title.page.event.live{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{% trans %}tournament.title.page.event.live{% endtrans %}
+{% endblock%}
+
+{% block administration %}
+{% endblock %}
+
+{% block tabs %}
+    {% if tournaments is not empty %}
+        <div class="tabs">
+            <ul>
+                {% for tournament in tournaments %}
+                <li><a{{ loop.index == 1 ? ' class="active"':''}} href="#t{{ tournament.id }}">{{ tournament.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% if tournaments is not empty %}
+    <div class="tab-content">
+        {% for tournament in tournaments %}
+        <div{{ loop.index == 1 ? ' class="active"':''}} id="t{{ tournament.id }}">
+            {{ tournament.embeddedPlayer }}
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    {% trans %}tournament.message.error.no_stream{% endtrans %}
+{% endif %}
+
+{% endblock %}

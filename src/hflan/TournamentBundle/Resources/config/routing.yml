@@ -2,6 +2,10 @@ hflan_tournament_index:
     pattern:  /
     defaults: { _controller: hflanTournamentBundle:Event:index }
 
+hflan_tournament_live:
+    pattern:  /live
+    defaults: { _controller: hflanTournamentBundle:Event:live }
+
 hflan_tournament_new_event:
     pattern:  /new/event
     defaults: { _controller: hflanTournamentBundle:Event:new }

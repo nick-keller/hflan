@@ -94,6 +94,11 @@ class Event
      */
     private $public;
 
+    /**
+     * @ORM\OneToMany(targetEntity="hflan\TournamentBundle\Entity\Tournament", mappedBy="event", cascade={"remove"})
+     */
+    protected $tournaments;
+
     public function __construct()
     {
         $this->start_at = new \Datetime();
@@ -106,6 +111,7 @@ class Event
         $this->close_at->setTime(23, 59);
         $this->name = "hf.lan";
         $this->slug = " ";
+        $this->tournaments = new ArrayCollection();
     }
 
     public function __toString()
@@ -328,5 +334,38 @@ class Event
     public function getCloseAt()
     {
         return $this->close_at;
+    }
+
+    /**
+     * Add tournaments
+     *
+     * @param \hflan\TournamentBundle\Entity\Tournament $tournaments
+     * @return Event
+     */
+    public function addTournament(\hflan\TournamentBundle\Entity\Tournament $tournaments)
+    {
+        $this->tournaments[] = $tournaments;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tournaments
+     *
+     * @param \hflan\TournamentBundle\Entity\Tournament $tournaments
+     */
+    public function removeTournament(\hflan\TournamentBundle\Entity\Tournament $tournaments)
+    {
+        $this->tournaments->removeElement($tournaments);
+    }
+
+    /**
+     * Get tournaments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTournaments()
+    {
+        return $this->tournaments;
     }
 }
