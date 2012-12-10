@@ -29,10 +29,10 @@
         {{ form_row(form.price) }}
         {{ form_row(form.embeddedPlayer) }}
         {{ form_label(form.customFields) }}
-        <div class="form-widget" data-prototype="&lt;div class=&quot;embedded-form&quot;>&lt;a class=&quot;del-btn&quot;>x&lt;/a>{{ form_widget(form.customFields.vars.prototype)|e }}&lt;/div>">
+        <div class="form-widget" data-prototype="&lt;div class=&quot;embedded-form&quot; style=&quot;display:block&quot;>&lt;a class=&quot;del-btn&quot;>x&lt;/a>{{ form_widget(form.customFields.vars.prototype)|e }}&lt;/div>">
             {{ form_errors(form.customFields) }}
             {% for field in form.customFields %}
-            <div class="embedded-form">
+            <div class="embedded-form" style="display: block;">
                 <a class="del-btn">x</a>
                 {{ form_widget(field) }}
             </div>

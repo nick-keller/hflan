@@ -67,11 +67,13 @@ tournament:
         customFields: Champs spéciaux
         validation: Règle de validation
         firstname: Prénom
-        lastname: Nom
+        lastname: Nom de famille
         nickname: Pseudo
         email: Email
         birthday: Date de naissance
         pcType: Type d'ordinateur
+        paid: A payé
+        confirmed: Validé
         message:
             team_name: Pour les tournois individuels indiquez ici votre pseudo.
     action:

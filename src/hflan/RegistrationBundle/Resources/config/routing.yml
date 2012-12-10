@@ -5,3 +5,33 @@ hflan_registration_index:
 hflan_registration_edit:
     pattern: /edit
     defaults: { _controller: hflanRegistrationBundle:Register:edit }
+
+hflan_registration_player_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: hflanRegistrationBundle:Register:playerEdit }
+    requirements:
+        id: \d+
+
+hflan_registration_show:
+    pattern: /show/{id}
+    defaults: { _controller: hflanRegistrationBundle:Register:show }
+    requirements:
+        id: \d+
+
+hflan_registration_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: hflanRegistrationBundle:Register:delete }
+    requirements:
+        id: \d+
+
+hflan_registration_valid:
+    pattern: /valid/{id}
+    defaults: { _controller: hflanRegistrationBundle:Register:valid }
+    requirements:
+        id: \d+
+
+hflan_registration_unvalid:
+    pattern: /unvalid/{id}
+    defaults: { _controller: hflanRegistrationBundle:Register:unvalid }
+    requirements:
+        id: \d+

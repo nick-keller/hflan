@@ -1,0 +1,85 @@
+{% extends "hflanRegistrationBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}register.title.page.show{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{% trans %}register.title.page.show{% endtrans %}
+{% endblock%}
+
+{% block administration %}
+    <h2>{% trans %}register.title.aside.team{% endtrans %}</h2>
+    {% if team.confirmed %}
+        <a href="{{ path('hflan_registration_unvalid', {id: team.id}) }}" class="btn"><i class="icon-arrow-down icon-white"></i> {% trans %}register.action.unvalid{% endtrans %}</a>
+    {% else %}
+        <a href="{{ path('hflan_registration_valid', {id: team.id}) }}" class="btn"><i class="icon-arrow-up icon-white"></i> {% trans %}register.action.valid{% endtrans %}</a>
+    {% endif %}
+    <a href="{{ path('hflan_registration_delete', {id: team.id}) }}" class="btn"><i class="icon-remove icon-white"></i> {% trans %}register.action.delete{% endtrans %}</a>
+    <hr>
+{% endblock %}
+
+{% block content %}
+
+<table class="table">
+    <tr>
+        <th>{% trans %}tournament.field.team_name{% endtrans %}</th>
+        <th>{% trans %}tournament.field.tournament{% endtrans %}</th>
+        <th>{% trans %}tournament.field.created_at{% endtrans %}</th>
+        <th>{% trans %}tournament.field.paid{% endtrans %}</th>
+        <th>{% trans %}tournament.field.confirmed{% endtrans %}</th>
+    </tr>
+    <tr>
+        <td>{{ team.name }}</td>
+        <td>{{ team.tournament.name }}</td>
+        <td>{{ team.createdAt|toHuman }}</td>
+        <td><i class="icon-{% if team.paid %}ok{% else %}remove{% endif %}"></i></td>
+        <td><i class="icon-{% if team.confirmed %}ok{% else %}remove{% endif %}"></i></td>
+    </tr>
+</table>
+
+<hr>
+
+{% for player in team.players %}
+<div class="embedded-form" style="padding: 10px; width: 45%;">
+    <div>
+        <p>
+            {% trans %}tournament.field.firstname{% endtrans %} :
+                <span style="float: right">
+                    {{ player.firstname }}
+                </span><br>
+            {% trans %}tournament.field.lastname{% endtrans %} :
+                <span style="float: right">
+                    {{ player.lastname }}
+                </span><br>
+            {% trans %}tournament.field.nickname{% endtrans %} :
+                <span style="float: right">
+                    {{ player.nickname }}
+                </span><br>
+            {% trans %}tournament.field.email{% endtrans %} :
+                <span style="float: right">
+                    {{ player.email }}
+                </span><br>
+            {% trans %}tournament.field.birthday{% endtrans %} :
+                <span style="float: right">
+                    {{ player.birthday|toDate }}
+                </span><br>
+            {% trans %}tournament.field.pcType{% endtrans %} :
+                <span style="float: right">
+                    {{ player.pcType }}
+                </span><br>
+            {% for field,value in player.customFields %}
+            {{ field }}
+                    <span style="float: right">
+                        {{ value }}
+                    </span><br>
+            {% endfor %}
+        </p>
+    </div>
+    <div>
+        <i class="icon-{% if player.isValid %}ok{% else %}remove{% endif %}"></i>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

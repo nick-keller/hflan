@@ -5,13 +5,24 @@ register:
             index: S'inscrire à un tournois
             edit: Finaliser mon inscription
             error: Impossible de s'inscrir
+            playerEdit: Editer un joueur
+            show: Informations sur l'équipe
         aside:
             admin: Administration
+            team: Gérer l'équipe
     message:
         success:
+            delete: Team supprimé
+            valid: Team validé !
         error:
+        player_valid: Ce joueur est prêt.
+        player_not_valid: Les informations sur ce joueur sont incomplètes, vous ne pourrez pas valider votre inscription temps qu'il manquera ces informations.
     field:
         playerX: Joueur %player%
     action:
         register: S'inscrire !
         save: Modifier
+        cancel: Annuler
+        delete: Supprimer l'équipe
+        valid: Passer en liste définitive
+        unvalid: Passer en liste d'attente

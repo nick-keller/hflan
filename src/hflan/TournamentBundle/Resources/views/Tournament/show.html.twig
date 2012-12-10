@@ -54,7 +54,7 @@
         <th>{% trans %}tournament.field.created_at{% endtrans %}</th>
     </tr>
     {% for team in confirmedTeams %}
-    <tr>
+    <tr href="{{ path('hflan_registration_show', {id: team.id}) }}">
         <td>{{ team.name }}</td>
         <td>{{ team.createdAt|toHuman|ucFirst }}</td>
     </tr>
@@ -77,7 +77,7 @@
         <th>{% trans %}tournament.field.created_at{% endtrans %}</th>
     </tr>
     {% for team in pendingTeams %}
-    <tr>
+    <tr href="{{ path('hflan_registration_show', {id: team.id}) }}">
         <td>{{ team.name }}</td>
         <td>{{ team.createdAt|toHuman|ucFirst }}</td>
     </tr>

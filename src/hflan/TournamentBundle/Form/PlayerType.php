@@ -11,12 +11,12 @@ class PlayerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', null, array('required'=>false))
-            ->add('lastname', null, array('required'=>false))
-            ->add('nickname', null, array('required'=>false))
-            ->add('email', null, array('required'=>false))
-            ->add('birthday', 'date', array('label'=>'tournament.field.birthday', 'widget'=>'single_text', 'date_format'=>'dd/MM/yyyy'))
-            ->add('pc_type', 'choice', array('choices'=>array('Descktop', 'Laptop')))
+            ->add('firstname', null, array('label'=>'tournament.field.firstname', 'required'=>false))
+            ->add('lastname', null, array('label'=>'tournament.field.lastname', 'required'=>false))
+            ->add('nickname', null, array('label'=>'tournament.field.nickname', 'required'=>false))
+            ->add('email', null, array('label'=>'tournament.field.email', 'required'=>false))
+            ->add('birthday', 'date', array('label'=>'tournament.field.birthday', 'required'=>false, 'widget'=>'single_text', 'format'=>'dd/MM/yyyy', 'attr'=>array('placeholder'=>'ex: 31/12/1995')))
+            ->add('pc_type', 'choice', array('label'=>'tournament.field.pcType', 'choices'=>array('Descktop'=>'Descktop', 'Laptop'=>'Laptop'), 'attr'=>array('style'=>'width:178px')))
         ;
     }
 

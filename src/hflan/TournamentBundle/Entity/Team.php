@@ -41,6 +41,13 @@ class Team
     private $confirmed;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="paid", type="boolean")
+     */
+    private $paid;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -69,6 +76,7 @@ class Team
     public function __construct()
     {
         $this->confirmed = false;
+        $this->paid = false;
         $this->created_at = new \Datetime();
         $this->players = new ArrayCollection();
     }
@@ -230,5 +238,28 @@ class Team
     public function getPlayers()
     {
         return $this->players;
+    }
+
+    /**
+     * Set paid
+     *
+     * @param boolean $paid
+     * @return Team
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+    
+        return $this;
+    }
+
+    /**
+     * Get paid
+     *
+     * @return boolean 
+     */
+    public function getPaid()
+    {
+        return $this->paid;
     }
 }

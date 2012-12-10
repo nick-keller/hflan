@@ -1,0 +1,27 @@
+{% extends "hflanRegistrationBundle::layout.html.twig" %}
+
+{% block title %}
+{{ parent() }} - {% trans %}register.title.page.playerEdit{% endtrans %}
+{% endblock %}
+
+{% block sectionTitle %}
+{{ app.user.team.name }} <small>{% trans %}register.title.page.playerEdit{% endtrans %}</small>
+{% endblock%}
+
+{% block administration %}
+{% endblock %}
+
+{% block content %}
+
+<form method="post" class="form form-label-large">
+
+    {{ form_widget(form) }}
+    {{ form_widget(customFields) }}
+    <div class="form-action">
+        <button type="submit" class="btn"><i class="icon-ok icon-white"></i> {% trans %}register.action.save{% endtrans %}</button>
+        <a href="{{ path('hflan_registration_edit') }}" class="btn"><i class="icon-remove icon-white"></i> {% trans %}register.action.cancel{% endtrans %}</a>
+    </div>
+
+</form>
+
+{% endblock %}

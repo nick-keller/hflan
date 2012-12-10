@@ -4,9 +4,8 @@
 
 {% block body %}
 <section>
-
     {% for key, message in app.session.getFlashes() %}
-    <div class="{{ key }}">
+    <div class="alert alert-{{ key }}">
         {{ message|trans({}, 'FOSUserBundle') }}
     </div>
     {% endfor %}

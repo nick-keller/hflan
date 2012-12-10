@@ -1,11 +1,11 @@
 {% extends "hflanRegistrationBundle::layout.html.twig" %}
 
 {% block title %}
-{{ parent() }} - {% trans %}tournament.title.page.register.edit{% endtrans %}
+{{ parent() }} - {% trans %}register.title.page.edit{% endtrans %}
 {% endblock %}
 
 {% block sectionTitle %}
-{{ app.user.team.name }} <small>{% trans %}tournament.title.page.register.edit{% endtrans %}</small>
+{{ app.user.team.name }} <small>{% trans %}register.title.page.edit{% endtrans %}</small>
 {% endblock%}
 
 {% block administration %}
@@ -19,28 +19,15 @@
     <tr>
         <th>{% trans %}tournament.field.game{% endtrans %}</th>
         <th>{% trans %}tournament.field.playersPerTeam{% endtrans %}</th>
-        <th>{% trans %}tournament.field.price{% endtrans %}</th>
         <th>{% trans %}tournament.field.prize_pool{% endtrans %}</th>
-    </tr>
-    <tr>
-        <td>{{ tournament.game }}</td>
-        <td>{{ tournament.playersPerTeam }}</td>
-        <td>{{ tournament.price }} €</td>
-        <td>{{ tournament.prizePool }} €</td>
-    </tr>
-</table>
-
-<p></p>
-
-<table class="table">
-    <tr>
-        <th>{% trans %}tournament.field.single_entry{% endtrans %}</th>
         <th>{% trans %}tournament.field.pricePerPlayer{% endtrans %}</th>
         <th>{% trans %}tournament.field.total_team{% endtrans %}</th>
     </tr>
     <tr>
-        <td>{{ tournament.event.price }} €</td>
-        <td><span style="color:#898989">{{ tournament.event.price }} € + {{ tournament.price }} € =</span> {{ tournament.event.price+tournament.price }} €</td>
+        <td>{{ tournament.game }}</td>
+        <td>{{ tournament.playersPerTeam }}</td>
+        <td>{{ tournament.prizePool }} €</td>
+        <td>{{ tournament.event.price+tournament.price }} €</td>
         <td>{{ (tournament.event.price+tournament.price)*tournament.playersPerTeam }} €</td>
     </tr>
 </table>
@@ -50,35 +37,62 @@
 <h2>{% trans %}tournament.title.page.register.edit{% endtrans %}</h2>
 
 <form method="post" class="form form-label-large">
-
     {{ form_label(teamForm.name) }}
     <div class="form-widget">
         {{ form_widget(teamForm.name) }}
+        {{ form_rest(teamForm) }}
         <button type="submit" class="btn"><i class="icon-ok icon-white"></i> {% trans %}register.action.save{% endtrans %}</button>
     </div>
 
 </form>
 
+<div style="height:30px"></div>
+
 {% for player in team.players %}
-    <div class="embedded-form" style="padding: 10px;">
+    <div class="embedded-form" style="padding: 10px; width: 45%;">
         <div>
             <p>
                 {% trans %}tournament.field.firstname{% endtrans %} :
-                {{ player.firstname }} <br>
+                <span style="float: right">
+                    {{ player.firstname }}
+                </span><br>
                 {% trans %}tournament.field.lastname{% endtrans %} :
-                {{ player.lastname }} <br>
+                <span style="float: right">
+                    {{ player.lastname }}
+                </span><br>
                 {% trans %}tournament.field.nickname{% endtrans %} :
-                {{ player.nickname }} <br>
+                <span style="float: right">
+                    {{ player.nickname }}
+                </span><br>
                 {% trans %}tournament.field.email{% endtrans %} :
-                {{ player.email }} <br>
+                <span style="float: right">
+                    {{ player.email }}
+                </span><br>
                 {% trans %}tournament.field.birthday{% endtrans %} :
-                {{ player.birthday|toDate }} <br>
+                <span style="float: right">
+                    {{ player.birthday|toDate }}
+                </span><br>
                 {% trans %}tournament.field.pcType{% endtrans %} :
-                {{ player.pcType }} <br>
+                <span style="float: right">
+                    {{ player.pcType }}
+                </span><br>
+                {% for field,value in player.customFields %}
+                    {{ field }}
+                    <span style="float: right">
+                        {{ value }}
+                    </span><br>
+                {% endfor %}
             </p>
         </div>
         <div>
-            hello
+            <a class="btn" href="{{ path('hflan_registration_player_edit', {id: player.id}) }}"><i class="icon-pencil icon-white"></i> {% trans %}tournament.action.edit{% endtrans %}</a>
+            <p>
+                {% if player.isValid %}
+                    {% trans %}register.message.player_valid{% endtrans %}
+                {% else %}
+                    {% trans %}register.message.player_not_valid{% endtrans %}
+                {% endif %}
+            </p>
         </div>
     </div>
 {% endfor %}

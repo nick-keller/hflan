@@ -74,6 +74,13 @@ class Player
     private $pc_type;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="customFields", type="array", nullable=true)
+     */
+    private $customFields;
+
+    /**
      * @ORM\ManyToOne(targetEntity="hflan\TournamentBundle\Entity\Team", inversedBy="players")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -241,6 +248,18 @@ class Player
         return $this;
     }
 
+    public function isValid()
+    {
+        if($this->firstname === null || $this->lastname === null || $this->nickname === null || $this->email === null || $this->birthday === null || $this->pc_type === null)
+            return false;
+
+        foreach($this->customFields as $value)
+            if($value === null)
+                return false;
+
+        return true;
+    }
+
     /**
      * Get birthday
      *
@@ -249,5 +268,28 @@ class Player
     public function getBirthday()
     {
         return $this->birthday;
+    }
+
+    /**
+     * Set customFields
+     *
+     * @param array $customFields
+     * @return Player
+     */
+    public function setCustomFields($customFields)
+    {
+        $this->customFields = $customFields;
+    
+        return $this;
+    }
+
+    /**
+     * Get customFields
+     *
+     * @return array 
+     */
+    public function getCustomFields()
+    {
+        return $this->customFields;
     }
 }

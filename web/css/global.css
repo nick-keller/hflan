@@ -725,6 +725,8 @@ option{
     padding: 15px 0 5px 0;
     margin-bottom: 5px;
     box-shadow: 0 0 0 1px white inset;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .embedded-form .del-btn{
@@ -752,19 +754,14 @@ option{
 }
 
 .embedded-form > div{
-    display: inline-block;
-    border-right: solid 1px #aca592;
-    box-shadow: -1px 0 0 white inset;
+    border-bottom: solid 1px #aca592;
+    box-shadow: 0 -1px 0 white inset;
     vertical-align: top;
-    margin-right: 20px;
-}
-
-.embedded-form > div:first-child{
-    width: 50%;
+    margin-bottom: 10px;
 }
 
 .embedded-form > div:last-child{
-    border-right: none;
+    border-bottom: none;
     box-shadow: none;
 }
 

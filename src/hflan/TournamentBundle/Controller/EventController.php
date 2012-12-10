@@ -80,6 +80,7 @@ class EventController extends Controller
             else
                 $this->get('session')->setFlash('error', "message.error.form");
         }
+
         return $this->render('hflanTournamentBundle:Event:edit.html.twig', array(
             'form' => $form->createView(),
             'event' => $event,
